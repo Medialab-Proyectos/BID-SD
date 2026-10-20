@@ -1,0 +1,17 @@
+<script>
+  // Título de la pestaña: Storybook lo arma solo ("<historia> ⋅ Storybook" y, al inicio, el nombre del paquete).
+  // Se reemplaza por el nombre del sistema, también cuando cambia al navegar entre historias.
+  (function () {
+    var NOMBRE = 'Client Portal — Sistema de diseño BID';
+    var aplicando = false;
+    function ajustar() {
+      if (aplicando) return;
+      var t = document.title || '';
+      var nuevo = /@storybook\/angular-vite/.test(t) ? NOMBRE : t.replace(/(\s[⋅·-]\s)?Storybook$/, function (_, sep) { return (sep || ' ⋅ ') + NOMBRE; });
+      if (nuevo !== t) { aplicando = true; document.title = nuevo; aplicando = false; }
+    }
+    var el = document.querySelector('title');
+    if (el) new MutationObserver(ajustar).observe(el, { childList: true, characterData: true, subtree: true });
+    ajustar();
+  })();
+</script>

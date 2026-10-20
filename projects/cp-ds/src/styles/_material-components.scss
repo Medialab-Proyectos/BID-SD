@@ -690,7 +690,7 @@
   .mat-mdc-table { --_hdr: var(--ds-ocean-50); }
   .ds-table--lc .mat-mdc-table { --_hdr: var(--ds-ocean-95); }
   .mat-mdc-table.mat-mdc-table .mat-mdc-header-row, .mat-mdc-table.mat-mdc-table .mat-mdc-header-cell { background-color: var(--_hdr); }
-  .mat-mdc-header-cell { padding: 4px 12px; }
+  .mat-mdc-header-cell { padding: 4px 12px; white-space: nowrap; } // Figma: los títulos de columna van en una sola línea
   .mat-mdc-header-cell .mat-sort-header-arrow, .mat-mdc-header-cell .mat-sort-header-container { color: inherit; }
   .mat-mdc-cell { padding: 4px 12px; }
   .ds-table--lc .mat-mdc-header-cell { color: var(--ds-color-text-default); }
