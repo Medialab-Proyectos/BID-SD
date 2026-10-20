@@ -1,0 +1,48 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+
+{/* Archivo generado por scripts/generar-colores-mdx.mjs — no editar a mano. */}
+
+<Meta title="Fundamentos/Colores" />
+
+# Colores
+
+En el código usar siempre el **token semántico** (`--ds-color-*`); la paleta cruda es la base de la que salen.
+
+> **Accesibilidad:** `--ds-color-text-warning-raw` (#e38a05) da 2.66:1 sobre blanco y no cumple AA. Para texto de
+> advertencia usar `--ds-color-text-warning-safe`. `--ds-color-text-link` y `--ds-color-border-control` están
+> ajustados por contraste respecto de Figma (ver Huecos del sistema A3 y A4).
+
+## Tokens semánticos
+
+<ColorPalette>
+  <ColorItem title="primary" subtitle="--ds-color-primary-*" colors={{"--ds-color-primary":"#007eb6","--ds-color-primary-hover":"#0072a4","--ds-color-primary-pressed":"#005d86"}} />
+  <ColorItem title="texto sobre color (on-*)" subtitle="--ds-color-on-*" colors={{"--ds-color-on-primary":"#ffffff","--ds-color-on-secondary":"#ffffff","--ds-color-on-secondary-container":"#002738","--ds-color-on-error":"#ffffff","--ds-color-on-error-container":"#790001","--ds-color-on-warning-container":"#4c2e02","--ds-color-on-success-container":"#14361c","--ds-color-on-tertiary-container":"#58466a","--ds-color-on-rose-container":"#8b546e","--ds-color-on-aqua-container":"#005e5c"}} />
+  <ColorItem title="secondary" subtitle="--ds-color-secondary-*" colors={{"--ds-color-secondary":"#004e70","--ds-color-secondary-container":"#e3eaef"}} />
+  <ColorItem title="error" subtitle="--ds-color-error-*" colors={{"--ds-color-error":"#d83a52","--ds-color-error-container":"#fde7ea"}} />
+  <ColorItem title="warning" subtitle="--ds-color-warning-*" colors={{"--ds-color-warning":"#e38a05","--ds-color-warning-container":"#fef2e1"}} />
+  <ColorItem title="success" subtitle="--ds-color-success-*" colors={{"--ds-color-success":"#00854d","--ds-color-success-container":"#daf2df"}} />
+  <ColorItem title="tertiary" subtitle="--ds-color-tertiary-*" colors={{"--ds-color-tertiary":"#7d6395","--ds-color-tertiary-container":"#efecf2"}} />
+  <ColorItem title="rose" subtitle="--ds-color-rose-*" colors={{"--ds-color-rose":"#c5779c","--ds-color-rose-container":"#fbeef3"}} />
+  <ColorItem title="aqua" subtitle="--ds-color-aqua-*" colors={{"--ds-color-aqua":"#008483","--ds-color-aqua-container":"#e7f0f0"}} />
+  <ColorItem title="background" subtitle="--ds-color-background-*" colors={{"--ds-color-background":"#f9f9fa"}} />
+  <ColorItem title="surface" subtitle="--ds-color-surface-*" colors={{"--ds-color-surface":"#ffffff","--ds-color-surface-container-lowest":"#f1fafd","--ds-color-surface-container-low":"#e6f6fc","--ds-color-surface-container":"#d9f3ff","--ds-color-surface-container-high":"#bdeaff","--ds-color-surface-container-highest":"#a3e2ff"}} />
+  <ColorItem title="text" subtitle="--ds-color-text-*" colors={{"--ds-color-text-default":"#232222","--ds-color-text-subtle":"#555353","--ds-color-text-subtlest":"#6d6b6b","--ds-color-text-disabled":"#929090","--ds-color-text-white":"#ffffff","--ds-color-text-link":"#0072a4","--ds-color-text-brand":"#003b54","--ds-color-text-success":"#286c39","--ds-color-text-warning-safe":"#804f02","--ds-color-text-warning-raw":"#e38a05","--ds-color-text-danger":"#a60001","--ds-color-text-violet":"#7d6395"}} />
+  <ColorItem title="border" subtitle="--ds-color-border-*" colors={{"--ds-color-border-subtle":"#eaeaea","--ds-color-border-default":"#c7c7c9","--ds-color-border-control":"#919193","--ds-color-border-control-hover":"#67676a","--ds-color-border-strong":"#535354","--ds-color-border-focus":"#007eb6","--ds-color-border-danger":"#d83a52","--ds-color-border-disabled":"#c7c7c9"}} />
+</ColorPalette>
+
+## Paleta cruda
+
+<ColorPalette>
+  <ColorItem title="Primary — Blue Sky" subtitle="--ds-sky-{tono}" colors={{"0":"#000000","10":"#002130","20":"#00425f","30":"#005d86","40":"#0072a4","50":"#007eb6","60":"#009ade","70":"#0eb5ff","80":"#50c9ff","90":"#a6e3ff","95":"#d9f4ff","99":"#eaf9ff","100":"#ffffff"}} />
+  <ColorItem title="Secondary — Blue Ocean" subtitle="--ds-ocean-{tono}" colors={{"0":"#000000","10":"#00141c","20":"#002738","30":"#003146","40":"#003b54","50":"#004e70","60":"#196e8c","70":"#5e90a8","80":"#94b4c4","90":"#cbd8df","95":"#e3eaef","100":"#ffffff"}} />
+  <ColorItem title="Error" subtitle="--ds-error-{tono}" colors={{"0":"#000000","10":"#2d0000","20":"#5a0000","30":"#790001","40":"#a60001","50":"#d83a52","60":"#de566b","70":"#e37283","80":"#e98e9c","90":"#eeabb5","95":"#f4c7ce","99":"#fde7ea","100":"#ffffff"}} />
+  <ColorItem title="Warning" subtitle="--ds-warning-{tono}" colors={{"0":"#000000","10":"#261701","20":"#4c2e02","30":"#804f02","40":"#bd7304","50":"#e38a05","60":"#fa9b0d","70":"#fbae3b","80":"#fcc068","90":"#fdd395","95":"#fee6c3","99":"#fef2e1","100":"#ffffff"}} />
+  <ColorItem title="Success" subtitle="--ds-success-{tono}" colors={{"0":"#000000","10":"#08150b","20":"#14361c","30":"#20562d","40":"#286c39","50":"#00854d","60":"#3b9f54","70":"#58c172","80":"#86d298","90":"#b3e3bf","95":"#daf2df","99":"#f0f9f2","100":"#ffffff"}} />
+  <ColorItem title="Neutral" subtitle="--ds-neutral-{tono}" colors={{"0":"#000000","10":"#0a0a0a","20":"#141414","30":"#232222","40":"#323131","50":"#3c3b3b","60":"#555353","70":"#6d6b6b","80":"#929090","90":"#b6b5b5","99":"#f3f3f3","100":"#ffffff"}} />
+  <ColorItem title="Neutral variant (bordes)" subtitle="--ds-neutral-variant-{tono}" colors={{"0":"#000000","10":"#29292a","20":"#535354","30":"#67676a","40":"#919193","50":"#a6a6a8","60":"#b1b1b3","70":"#bcbcbe","80":"#c7c7c9","95":"#eaeaea","100":"#ffffff"}} />
+  <ColorItem title="Tertiary — Violeta" subtitle="--ds-tertiary-{tono}" colors={{"0":"#000000","10":"#3e314b","20":"#58466a","30":"#6c5681","40":"#7d6395","50":"#8b6fa7","60":"#9274af","70":"#b6a6cb","80":"#cbc0d7","90":"#ded7e5","95":"#efecf2","99":"#f6f5f8","100":"#ffffff"}} />
+  <ColorItem title="Rose" subtitle="--ds-rose-{tono}" colors={{"0":"#000000","10":"#633b4e","20":"#8b546e","30":"#ab6787","40":"#c5779c","50":"#dc85af","60":"#e78bb7","70":"#eeb2cd","80":"#f2cbdb","90":"#f7dce7","95":"#fbeef3","99":"#fdf6f9","100":"#ffffff"}} />
+  <ColorItem title="Aqua" subtitle="--ds-aqua-{tono}" colors={{"10":"#004241","20":"#005e5c","30":"#007371","40":"#008483","50":"#009492","60":"#009b99","70":"#85bcba","80":"#accece","90":"#cbe0df","95":"#e7f0f0","99":"#f2f7f7","100":"#ffffff"}} />
+  <ColorItem title="Yellow (sin uso semántico asignado)" subtitle="--ds-yellow-{tono}" colors={{"10":"#261f00","20":"#4d3d00","30":"#806400","40":"#b38a00","50":"#e6af00","60":"#ffc400","70":"#ffd233","80":"#ffe066","90":"#ffee99","95":"#fff7cc","99":"#fffbe6"}} />
+  <ColorItem title="Lime (sin uso semántico asignado)" subtitle="--ds-lime-{tono}" colors={{"10":"#1b230b","20":"#354616","30":"#526d21","40":"#6f932c","50":"#8dba38","60":"#9bbb3f","70":"#b1cb57","80":"#c7dc7a","90":"#ddedad","95":"#eef6d6","99":"#f7fbea"}} />
+</ColorPalette>

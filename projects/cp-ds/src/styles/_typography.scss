@@ -1,0 +1,53 @@
+/* Tipografía — utilidades .ds-text--{escala}[-{peso}] */
+/* Tipografía: bloque .ds-text, modificador --escala[-peso] */
+.ds-text{ font-family: var(--ds-font-family); margin: 0; color: var(--ds-color-text-default); }
+
+.ds-text--display-lg{ font-size: var(--ds-display-lg-size); line-height: var(--ds-display-lg-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--display-lg-semibold{ font-size: var(--ds-display-lg-size); line-height: var(--ds-display-lg-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--display-lg-bold{ font-size: var(--ds-display-lg-size); line-height: var(--ds-display-lg-lh); font-weight: var(--ds-font-weight-bold); }
+
+.ds-text--display-md{ font-size: var(--ds-display-md-size); line-height: var(--ds-display-md-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--display-md-semibold{ font-size: var(--ds-display-md-size); line-height: var(--ds-display-md-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--display-md-bold{ font-size: var(--ds-display-md-size); line-height: var(--ds-display-md-lh); font-weight: var(--ds-font-weight-bold); }
+
+.ds-text--display-sm{ font-size: var(--ds-display-sm-size); line-height: var(--ds-display-sm-lh); letter-spacing: var(--ds-display-sm-ls); font-weight: var(--ds-font-weight-regular); }
+.ds-text--display-sm-semibold{ font-size: var(--ds-display-sm-size); line-height: var(--ds-display-sm-lh); letter-spacing: var(--ds-display-sm-ls); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--display-sm-bold{ font-size: var(--ds-display-sm-size); line-height: var(--ds-display-sm-lh); letter-spacing: var(--ds-display-sm-ls); font-weight: var(--ds-font-weight-bold); }
+
+.ds-text--headline-lg{ font-size: var(--ds-headline-lg-size); line-height: var(--ds-headline-lg-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--headline-lg-semibold{ font-size: var(--ds-headline-lg-size); line-height: var(--ds-headline-lg-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--headline-md{ font-size: var(--ds-headline-md-size); line-height: var(--ds-headline-md-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--headline-md-semibold{ font-size: var(--ds-headline-md-size); line-height: var(--ds-headline-md-lh); font-weight: var(--ds-font-weight-semibold); }
+/* Headline Small: Figma solo define Regular/SemiBold (nodo 51:1776) — sin -bold */
+.ds-text--headline-sm{ font-size: var(--ds-headline-sm-size); line-height: var(--ds-headline-sm-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--headline-sm-semibold{ font-size: var(--ds-headline-sm-size); line-height: var(--ds-headline-sm-lh); font-weight: var(--ds-font-weight-semibold); }
+
+/* Title: la página de Tipografía de Figma (nodo 51:1780) lista solo Regular, pero los COMPONENTES usan estas variantes (Dialog y CardTitle: Title/Medium Bold;
+   Drawer-Header: Title/Large SemiBold; MiniCard: Title/Medium SemiBold; cabecera de Table: Title/Small SemiBold). Existen solo estas cuatro. */
+.ds-text--title-lg{ font-size: var(--ds-title-lg-size); line-height: var(--ds-title-lg-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--title-lg-semibold{ font-size: var(--ds-title-lg-size); line-height: var(--ds-title-lg-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--title-md{ font-size: var(--ds-title-md-size); line-height: var(--ds-title-md-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--title-md-semibold{ font-size: var(--ds-title-md-size); line-height: var(--ds-title-md-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--title-md-bold{ font-size: var(--ds-title-md-size); line-height: var(--ds-title-md-lh); font-weight: var(--ds-font-weight-bold); }
+.ds-text--title-sm{ font-size: var(--ds-title-sm-size); line-height: var(--ds-title-sm-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--title-sm-semibold{ font-size: var(--ds-title-sm-size); line-height: var(--ds-title-sm-lh); font-weight: var(--ds-font-weight-semibold); }
+
+.ds-text--label-lg{ font-size: var(--ds-label-lg-size); line-height: var(--ds-label-lg-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--label-lg-semibold{ font-size: var(--ds-label-lg-size); line-height: var(--ds-label-lg-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--label-lg-bold{ font-size: var(--ds-label-lg-size); line-height: var(--ds-label-lg-lh); font-weight: var(--ds-font-weight-bold); }
+/* Label Medium: Figma solo define Regular/SemiBold (nodo 51:1784) — sin -bold */
+.ds-text--label-md{ font-size: var(--ds-label-md-size); line-height: var(--ds-label-md-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--label-md-semibold{ font-size: var(--ds-label-md-size); line-height: var(--ds-label-md-lh); font-weight: var(--ds-font-weight-semibold); }
+/* Label Small: Figma solo define Regular — sin -semibold */
+.ds-text--label-sm{ font-size: var(--ds-label-sm-size); line-height: var(--ds-label-sm-lh); font-weight: var(--ds-font-weight-regular); }
+/* Label x-Small: Figma define solo SemiBold ("Label/x-Small SemiBold", 10/16) — lo usan los Status-Chips x-small */
+.ds-text--label-xs-semibold{ font-size: var(--ds-label-xs-size); line-height: var(--ds-label-xs-lh); font-weight: var(--ds-font-weight-semibold); }
+
+.ds-text--body-lg{ font-size: var(--ds-body-lg-size); line-height: var(--ds-body-lg-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--body-lg-semibold{ font-size: var(--ds-body-lg-size); line-height: var(--ds-body-lg-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--body-lg-bold{ font-size: var(--ds-body-lg-size); line-height: var(--ds-body-lg-lh); font-weight: var(--ds-font-weight-bold); }
+.ds-text--body-md{ font-size: var(--ds-body-md-size); line-height: var(--ds-body-md-lh); font-weight: var(--ds-font-weight-regular); }
+.ds-text--body-md-semibold{ font-size: var(--ds-body-md-size); line-height: var(--ds-body-md-lh); font-weight: var(--ds-font-weight-semibold); }
+.ds-text--body-md-bold{ font-size: var(--ds-body-md-size); line-height: var(--ds-body-md-lh); font-weight: var(--ds-font-weight-bold); }
+.ds-text--body-sm{ font-size: var(--ds-body-sm-size); line-height: var(--ds-body-sm-lh); font-weight: var(--ds-font-weight-regular); }
+

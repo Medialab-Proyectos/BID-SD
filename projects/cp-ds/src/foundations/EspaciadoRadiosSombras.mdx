@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Fundamentos/Espaciado, radios y sombras" />
+
+# Espaciado, radios y sombras
+
+## Espaciado
+
+Base de 8px. Token: `--ds-space-{n}` · Utilidades: `u-m-{n}`, `u-p-{n}`, `u-gap-{n}`.
+
+export const spaces = [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80];
+
+<div style={{ display: 'grid', gap: '8px' }}>
+  {spaces.map((s) => (
+    <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <code style={{ width: '120px' }}>--ds-space-{s}</code>
+      <div style={{ width: `var(--ds-space-${s})`, height: '16px', background: 'var(--ds-color-primary)', borderRadius: '2px' }} />
+      <span className="ds-text ds-text--body-sm">{s}px</span>
+    </div>
+  ))}
+</div>
+
+## Radios
+
+export const radii = [
+  ['xs', '4px', 'Checkbox, inputs, menú, tooltip, banners, snackbar'],
+  ['s', '8px', 'Chips, tabla, card, diálogo, upload card'],
+  ['m', '16px', 'Progress bar, DatePicker, tooltips'],
+  ['l', '80px', 'Botones'],
+  ['full', '999px', 'Switch, pills, avatares'],
+];
+
+<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+  {radii.map(([n, v, use]) => (
+    <div key={n} style={{ width: '160px' }}>
+      <div style={{ width: '96px', height: '64px', background: 'var(--ds-sky-95)', border: '2px solid var(--ds-color-primary)', borderRadius: `var(--ds-radius-${n})` }} />
+      <p className="ds-text ds-text--label-lg-semibold" style={{ marginTop: '8px' }}><code>--ds-radius-{n}</code> · {v}</p>
+      <p className="ds-text ds-text--body-sm" style={{ color: 'var(--ds-color-text-subtle)' }}>{use}</p>
+    </div>
+  ))}
+</div>
+
+## Sombras (elevación)
+
+export const shadows = ['xs', 's', 'm', 'l', 'xl'];
+
+<div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', padding: '16px 0 32px' }}>
+  {shadows.map((s) => (
+    <div key={s} style={{ width: '120px', height: '80px', background: '#fff', borderRadius: 'var(--ds-radius-s)', boxShadow: `var(--ds-shadow-${s})`, display: 'grid', placeItems: 'center' }}>
+      <code>--ds-shadow-{s}</code>
+    </div>
+  ))}
+</div>
+
+## Grid
+
+12 columnas en desktop/tablet (≥1024px), 4 en mobile. Contenedor máximo 1152px, gutter 24px,
+gap 32px. Clases: `ds-container` y `ds-grid`.

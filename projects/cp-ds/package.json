@@ -1,0 +1,18 @@
+{
+  "name": "@bid/cp-ds",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/material": "^21.2.0",
+    "@angular/cdk": "^21.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "description": "Sistema de Diseño Client Portal (BID) — tema de Angular Material 21 y componentes propios",
+  "exports": {
+    "./styles/*": "./styles/*"
+  }
+}

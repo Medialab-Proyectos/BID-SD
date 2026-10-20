@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Fundamentos/Tipografía" />
+
+# Tipografía
+
+Una sola familia: **Open Sans**, con tres pesos: Regular (400), SemiBold (600) y Bold (700).
+Clase de utilidad: `ds-text ds-text--{escala}[-{peso}]`. En los componentes de Material la
+tipografía ya llega por el tema (Open Sans, pesos 400/600/700).
+
+export const scale = [
+  ['display-lg', '48 / 54'], ['display-md', '40 / 47'], ['display-sm', '36 / 44'],
+  ['headline-lg', '32 / 40'], ['headline-md', '28 / 36'], ['headline-sm', '24 / 32'],
+  ['title-lg', '22 / 28'], ['title-md', '18 / 24'], ['title-sm', '14 / 20'],
+  ['body-lg', '16 / 24'], ['body-md', '14 / 20'], ['body-sm', '12 / 16'],
+  ['label-lg', '14 / 20'], ['label-md', '12 / 16'], ['label-sm', '11 / 16'], ['label-xs', '10 / 16'],
+];
+
+<table style={{ width: '100%', borderCollapse: 'collapse' }}>
+  <thead>
+    <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--ds-color-border-default)' }}>
+      <th style={{ padding: '8px' }}>Escala</th>
+      <th style={{ padding: '8px' }}>Tamaño / interlineado (px)</th>
+      <th style={{ padding: '8px' }}>Muestra</th>
+    </tr>
+  </thead>
+  <tbody>
+    {scale.map(([name, size]) => (
+      <tr key={name} style={{ borderBottom: '1px solid var(--ds-color-border-subtle)' }}>
+        <td style={{ padding: '12px 8px' }}><code>ds-text--{name}</code></td>
+        <td style={{ padding: '12px 8px' }}>{size}</td>
+        <td style={{ padding: '12px 8px' }}><span className={`ds-text ds-text--${name}`}>Sistema de diseño BID</span></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Pesos
+
+<p className="ds-text ds-text--body-lg">Regular 400 — <code>ds-text--body-lg</code></p>
+<p className="ds-text ds-text--body-lg-semibold">SemiBold 600 — <code>ds-text--body-lg-semibold</code></p>
+<p className="ds-text ds-text--body-lg-bold">Bold 700 — <code>ds-text--body-lg-bold</code></p>
+
+### Qué pesos existen por escala (verificado contra Figma, nodo `1:23`)
+
+No todas las escalas tienen Regular + SemiBold + Bold: Figma define los pesos que se listan acá. En **Title**, la página de Tipografía solo muestra Regular, pero los componentes
+usan las variantes SemiBold/Bold indicadas (verificado en cada nodo); la librería expone solo esas.
+
+| Escala | Pesos en Figma |
+|---|---|
+| `display-lg` / `display-md` / `display-sm` | Regular, SemiBold, Bold |
+| `headline-lg` / `headline-md` | Regular, SemiBold |
+| `headline-sm` | Regular, SemiBold *(sin Bold)* |
+| `title-lg` | Regular; **SemiBold** (Drawer-Header) |
+| `title-md` | Regular; **SemiBold** (MiniCard) y **Bold** (Dialog, CardTitle, sub-header) |
+| `title-sm` | Regular; **SemiBold** (cabecera de Table) |
+| `label-lg` | Regular, SemiBold, Bold |
+| `label-md` | Regular, SemiBold *(sin Bold)* |
+| `label-sm` | **Solo Regular** |
+| `label-xs` | **Solo SemiBold** (`ds-text--label-xs-semibold`; lo usan los Chips x-small) |
+| `body-lg` / `body-md` | Regular, SemiBold, Bold |
+| `body-sm` | **Solo Regular** |
+
+`display-sm` además lleva `letter-spacing: 0.8px` (las demás escalas van en 0).

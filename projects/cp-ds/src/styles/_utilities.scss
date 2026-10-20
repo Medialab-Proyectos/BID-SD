@@ -1,0 +1,35 @@
+/* Utilidades de espaciado, radio, sombra y grid — prefijo u- */
+/* Espaciado */
+.u-m-0{margin:var(--ds-space-0)} .u-m-4{margin:var(--ds-space-4)} .u-m-8{margin:var(--ds-space-8)}
+.u-m-12{margin:var(--ds-space-12)} .u-m-16{margin:var(--ds-space-16)} .u-m-24{margin:var(--ds-space-24)}
+.u-m-32{margin:var(--ds-space-32)} .u-m-40{margin:var(--ds-space-40)}
+.u-p-0{padding:var(--ds-space-0)} .u-p-4{padding:var(--ds-space-4)} .u-p-8{padding:var(--ds-space-8)}
+.u-p-12{padding:var(--ds-space-12)} .u-p-16{padding:var(--ds-space-16)} .u-p-24{padding:var(--ds-space-24)}
+.u-p-32{padding:var(--ds-space-32)} .u-p-40{padding:var(--ds-space-40)}
+.u-gap-4{gap:var(--ds-space-4)} .u-gap-8{gap:var(--ds-space-8)} .u-gap-12{gap:var(--ds-space-12)}
+.u-gap-16{gap:var(--ds-space-16)} .u-gap-24{gap:var(--ds-space-24)} .u-gap-32{gap:var(--ds-space-32)}
+
+/* Radios */
+.u-radius-xs{border-radius:var(--ds-radius-xs)} .u-radius-s{border-radius:var(--ds-radius-s)}
+.u-radius-m{border-radius:var(--ds-radius-m)} .u-radius-l{border-radius:var(--ds-radius-l)}
+.u-radius-full{border-radius:var(--ds-radius-full)}
+
+/* Sombras */
+.u-shadow-xs{box-shadow:var(--ds-shadow-xs)} .u-shadow-s{box-shadow:var(--ds-shadow-s)}
+.u-shadow-m{box-shadow:var(--ds-shadow-m)} .u-shadow-l{box-shadow:var(--ds-shadow-l)}
+.u-shadow-xl{box-shadow:var(--ds-shadow-xl)}
+
+/* Grid */
+.ds-container{
+  max-width: var(--ds-grid-container);
+  margin: 0 auto;
+  padding: 0 var(--ds-grid-gutter);
+}
+.ds-grid{
+  display: grid;
+  gap: var(--ds-grid-gap);
+  grid-template-columns: repeat(var(--ds-grid-cols-mobile), 1fr);
+}
+@media (min-width: 1024px){
+  .ds-grid{ grid-template-columns: repeat(var(--ds-grid-cols-desktop), 1fr); }
+}

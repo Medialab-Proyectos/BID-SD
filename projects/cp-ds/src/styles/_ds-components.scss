@@ -1,0 +1,705 @@
+// Componentes propios del BID — los que Angular Material NO tiene.
+// Portados de libreria-css/componentes.css (verificado contra Figma). Ajustes de contraste marcados con [AA].
+
+:root{
+  /* File Uploader — página "File Uploader" */
+  --ds-upload-icon-circle: 40px;
+  --ds-upload-row-height: 56px;
+
+  /* Rating / Favorite Toggle — página "Ratings" (usa el componente "FavoriteToggle" para la estrella) */
+  --ds-rating-star-box: 48px;
+  --ds-rating-star-icon: 32px;
+
+  /* Icon status — página "Icon status" (atómico, reusado por Stepper) */
+  --ds-status-icon-size-md: 40px;
+  --ds-status-icon-size-sm: 24px;
+  --ds-status-icon-glyph-md: 32px;
+  --ds-status-icon-glyph-sm: 20px;
+
+  /* Avatar — página "Avatar" (nodo 425:42573) */
+  --ds-avatar-size: 40px;
+  --ds-avatar-size-sm: 32px;
+  --ds-avatar-badge-size: 12px;
+  --ds-avatar-badge-dot: 8px;
+
+  /* Icon Container — página "Icon container" (nodo 7728:8789): "adorno" cuadrado/redondo
+     detrás de un ícono (NO confundir con IconButton, que es siempre clickeable). */
+  --ds-iconctr-size-xs: 20px;  --ds-iconctr-pad-xs: 2px;  --ds-iconctr-glyph-xs: 16px;
+  --ds-iconctr-size-sm: 32px;  --ds-iconctr-pad-sm: 8px;  --ds-iconctr-glyph-sm: 16px;
+  --ds-iconctr-size-md: 40px;  --ds-iconctr-pad-md: 8px;  --ds-iconctr-glyph-md: 24px;
+  --ds-iconctr-size-lg: 64px;  --ds-iconctr-pad-lg: 16px; --ds-iconctr-glyph-lg: 32px;
+
+  /* Icon — página "Icon" (nodo 831:8042): tamaños nombrados XS/S/M/L/XL del glifo suelto */
+  --ds-icon-size-xs: 12px;
+  --ds-icon-size-s: 16px;
+  --ds-icon-size-m: 24px;
+  --ds-icon-size-l: 32px;
+  --ds-icon-size-xl: 64px;
+
+  /* Progress Bar — página "Progress Bar" (nodo 648:33618) */
+  --ds-progress-height: 8px;
+  --ds-progress-radius: var(--ds-radius-m); /* = 16px, el propio comentario de Round corners en Figma ya cita "Progress Bar" para este token */
+
+  /* Progress Spinner — página "Progress Spinner, loader" (nodo 11:708): Diameter Large/Medium/Small/XSmall.
+     Grosor del anillo confirmado real bajando el SVG del spinner grande (~13% del diámetro) y escalado proporcional. */
+  --ds-spinner-size-lg: 64px;  --ds-spinner-stroke-lg: 8px;
+  --ds-spinner-size-md: 32px;  --ds-spinner-stroke-md: 4px;
+  --ds-spinner-size-sm: 24px;  --ds-spinner-stroke-sm: 3px;  /* = el mismo spinner que ya usa .ds-btn--lg al cargar */
+  --ds-spinner-size-xs: 16px;  --ds-spinner-stroke-xs: 2px;  /* = el mismo spinner que ya usa .ds-btn--sm al cargar */
+
+  /* Loader (isologo de marca) — página "Spinner, loader" (nodos 12200:19582 / 12371:43028) */
+  --ds-loader-brand-w: 122.812px;
+  --ds-loader-brand-h: 113px;
+}
+
+@keyframes ds-btn-spin{ to{ transform:rotate(360deg) } }
+/* ==========================================================
+   ÍCONOS — misma fuente que usa <mat-icon> de Angular Material
+   (Material Symbols Outlined, por ligadura de texto: <span
+   class="ds-icon">check</span> en vez de un SVG dibujado a mano).
+   Requiere cargar la fuente real en el <head> del consumidor:
+   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+   ========================================================== */
+.ds-icon{
+  font-family:'Material Symbols Outlined'; font-weight:normal; font-style:normal;
+  line-height:1; letter-spacing:normal; text-transform:none; white-space:nowrap; word-wrap:normal;
+  direction:ltr; -webkit-font-smoothing:antialiased; display:inline-block;
+  font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; /* requiere la fuente pedida con RANGOS (ver <head>), si no el eje FILL queda fijo y no se puede rellenar por CSS */
+}
+/* ==========================================================
+   ICON — página "Icon" (nodo 831:8042)
+   NO es un componente nuevo: son los modificadores de color/tamaño
+   que se le aplican a .ds-icon (la unidad atómica ya usada en todos
+   los demás bloques). Confirmado bajando los SVG reales de cada
+   color/tamaño/dark-mode — ver notas por color abajo.
+   Tamaños nombrados: XS=12 / S=16 / M=24 (= tamaño base de .ds-icon,
+   no necesita modificador) / L=32 / XL=64.
+   Estructura: <span class="ds-icon ds-icon--l ds-icon--green">check</span>
+   ========================================================== */
+
+.ds-icon--xs{ font-size:var(--ds-icon-size-xs); font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 } /* clamp — 12px está bajo el piso de la fuente variable (20) */
+.ds-icon--s{ font-size:var(--ds-icon-size-s); font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 }
+.ds-icon--m{ font-size:var(--ds-icon-size-m) } /* = 24px, tamaño base de .ds-icon */
+.ds-icon--l{ font-size:var(--ds-icon-size-l); font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 32 }
+.ds-icon--xl{ font-size:var(--ds-icon-size-xl); font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48 } /* clamp — 64px excede el techo (48) */
+
+.ds-icon--gray{ color:var(--ds-neutral-variant-20) }     /* = Gray* (default), ya es el color base de .ds-icon */
+.ds-icon--black{ color:var(--ds-neutral-10) }             /* #0a0a0a */
+.ds-icon--aqua{ color:var(--ds-aqua-30) }                 /* #007371 */
+.ds-icon--violet{ color:var(--ds-tertiary-30) }           /* #6c5681 — ojo, distinto de --ds-color-text-violet (tertiary-40) */
+.ds-icon--rose{ color:var(--ds-rose-30) }                 /* #ab6787 — distinto de --ds-color-rose (rose-40) */
+.ds-icon--blue{ color:var(--ds-ocean-50) }                /* #004e70 — "Blue", distinto de --cyan/primary */
+.ds-icon--red{ color:var(--ds-color-text-danger) }        /* #a60001 */
+.ds-icon--green{ color:var(--ds-color-text-success) }     /* #286c39 */
+.ds-icon--cyan{ color:var(--ds-color-primary) }           /* #007eb6 — es la que Figma llama "LightCyan (primary)" */
+.ds-icon--orange{ color:var(--ds-warning-40) }            /* #bd7304 — "LightOrange (warning)" */
+.ds-icon--disabled{ color:var(--ds-neutral-10); opacity:.38 }
+.ds-icon--inverse{ color:#ffffff }                        /* = "Knock-out", para fondos oscuros */
+.ds-icon--inverse-disabled{ color:#ffffff; opacity:.38 }  /* = "Inverse Disabled" */
+/* ==========================================================
+   FILE UPLOADER — página "File Uploader" (nodo 2474:7699)
+   Estados reales: Default/Disabled (sin archivo) × Uploading/Success/
+   Error/MultipleFiles (con fila de archivo + ícono según el caso).
+   El botón "Upload" es el mismo .ds-btn--primary (radius-l, mismo azul).
+   Estructura: <div class="ds-upload">
+   <div class="ds-upload__card"><div class="ds-upload__icon ds-icon">upload_file</div>
+   <p class="ds-upload__text"><a class="ds-upload__link" href="#">Click to upload</a> or drag and drop files here</p>
+   <span class="ds-upload__hint">Accepted formats: PDF, DOC (Max: 25MB)</span></div>
+   <div class="ds-upload__file ds-upload__file--info">…</div>
+   <button class="ds-btn ds-btn--primary">Upload</button></div>
+   ========================================================== */
+
+.ds-upload{ display:flex; flex-direction:column; gap:var(--ds-space-16); font-family:var(--ds-font-family); width:100% }
+.ds-upload__card{
+  display:flex; flex-direction:column; align-items:center; gap:var(--ds-space-16); width:100%;
+  background:#ffffff; border:1px dashed var(--ds-color-border-control); border-radius:var(--ds-radius-s); /* = Border/Control dashed, small 8px */
+  padding:var(--ds-space-24) var(--ds-space-16); text-align:center; cursor:pointer;
+}
+.ds-upload--dragover .ds-upload__card{ border-style:solid; border-color:var(--ds-color-border-focus) }
+.ds-upload__icon{
+  display:flex; align-items:center; justify-content:center; width:var(--ds-upload-icon-circle); height:var(--ds-upload-icon-circle);
+  border:1px solid var(--ds-neutral-variant-50); border-radius:var(--ds-radius-full); font-size:24px; color:var(--ds-color-text-default); /* = Border/Normal #a6a6a8 */
+}
+.ds-upload__text{ margin:0; font-size:var(--ds-body-lg-size); line-height:var(--ds-body-lg-lh); font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-default) }
+.ds-upload__link{ color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */; text-decoration:none } /* = Link/default #007eb6 */
+.ds-upload__hint{ font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh); font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-subtle) }
+
+/* fila de archivo — banner angosto con ícono + nombre + acción */
+.ds-upload__file{
+  display:flex; align-items:center; gap:var(--ds-space-8); height:var(--ds-upload-row-height);
+  padding:var(--ds-space-8) var(--ds-space-16); border-radius:var(--ds-radius-xs); border-left:4px solid transparent;
+}
+.ds-upload__file-name{ flex:1; font-size:var(--ds-label-lg-size); line-height:var(--ds-label-lg-lh); color:var(--ds-color-text-default) }
+.ds-upload__file--info{ background:var(--ds-color-secondary-container); border-left-color:var(--ds-color-on-secondary-container); color:var(--ds-color-on-secondary-container) } /* = chip/info bg/fg */
+.ds-upload__file--uploading{ background:var(--ds-color-secondary-container); border-left-color:var(--ds-color-border-focus); color:var(--ds-color-primary) }
+.ds-upload__file--uploading .ds-iconbtn{ cursor:default } /* no es accionable mientras sube — solo muestra progreso */
+.ds-upload__file--uploading .ds-iconbtn:hover{ background:transparent }
+.ds-upload__file--uploading .ds-iconbtn .ds-icon{ animation:ds-btn-spin 1s linear infinite } /* confirmado real: el ícono "progress_activity" va en el icon-button final de la fila, no al inicio (ahí va el ícono de estado "info", estático) */
+.ds-upload__file--error{ background:var(--ds-color-error-container); border-left-color:var(--ds-color-border-danger); color:var(--ds-error-30) }
+.ds-upload__file--error .ds-upload__file-name{ color:var(--ds-error-30) }
+.ds-upload__file .ds-iconbtn{ color:inherit } /* el ícono de acción (spinner/close/delete) sigue el color semántico de la fila, no el gris default del icon-button */
+.ds-upload__file > .ds-icon:first-child{ font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 } /* confirmado real (SVG de Figma): el ícono de estado inicial es siempre RELLENO (círculo sólido), no contorno */
+.ds-upload__file--info > .ds-icon:first-child, .ds-upload__file--uploading > .ds-icon:first-child{ color:var(--ds-color-primary) } /* = "info" relleno #007eb6 */
+.ds-upload__file--error > .ds-icon:first-child{ color:var(--ds-color-text-danger) } /* = "error" relleno #a60001 — distinto del rojo del texto (--ds-error-30) */
+
+.ds-upload--disabled .ds-upload__card{ border-color:var(--ds-btn-stroke-border) }
+.ds-upload--disabled .ds-upload__icon{ border-color:var(--ds-btn-stroke-border); color:var(--ds-color-text-disabled) }
+.ds-upload--disabled .ds-upload__text, .ds-upload--disabled .ds-upload__hint{ color:var(--ds-color-text-disabled) }
+.ds-upload--disabled .ds-upload__link{ color:var(--ds-color-text-disabled) }
+
+/* ==========================================================
+   RATING / FAVORITE TOGGLE — página "Ratings" (5547:5451), estrella
+   = componente real "FavoriteToggle" (7853:1071). Mismo glifo
+   Material Symbols "star" para ambos estados — lo que cambia es el
+   color y el eje de relleno (FILL) de la fuente variable.
+   Estructura: <div class="ds-rating">
+   <button class="ds-rating__star is-filled"><span class="ds-icon">star</span></button>×5</div>
+   ========================================================== */
+
+.ds-rating{ display:inline-flex; gap:0 }
+.ds-rating__star{
+  display:flex; align-items:center; justify-content:center; width:var(--ds-rating-star-box); height:var(--ds-rating-star-box);
+  border:none; background:transparent; cursor:pointer; padding:8px;
+}
+.ds-rating__star .ds-icon{ font-size:var(--ds-rating-star-icon); color:var(--ds-neutral-variant-50); font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 32 } /* vacía: gris, contorno */
+.ds-rating__star.is-filled .ds-icon{ color:var(--ds-color-primary); font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 32 } /* llena: azul primary, relleno */
+
+/* ==========================================================
+   ICON STATUS — página "Icon status" (nodo 12519:22794)
+   Átomo reusado por Stepper (Activo/Incompleto/Completo/Error).
+   Size Medium (40px, glifo 32px) / Small (24px, glifo 20px).
+   CONFIRMADO con los SVG reales exportados desde Figma: NO es un
+   círculo de fondo (CSS) + glifo blanco encima — cada estado es un
+   único glifo de Material Symbols con eje FILL=1 (relleno), que ya
+   trae el círculo/triángulo Y el símbolo interior en una sola pieza
+   (el "hueco" del check/!/símbolo es parte del mismo path). Por eso
+   "Active" (el único sin relleno) usa el glifo "circle" normal, y
+   "Incomplete"/"Error" NO usan "priority_high"/el triángulo suelto:
+   usan los glifos "error" y "warning" (respectivamente) en FILL=1.
+   Estructura: <span class="ds-status-icon ds-status-icon--complete"><span class="ds-icon">check_circle</span></span>
+   ========================================================== */
+
+.ds-status-icon{
+  --_fill:1; --_opsz:32;
+  display:inline-flex; align-items:center; justify-content:center; width:var(--ds-status-icon-size-md); height:var(--ds-status-icon-size-md);
+}
+.ds-status-icon .ds-icon{ font-size:var(--ds-status-icon-glyph-md); font-variation-settings:'FILL' var(--_fill), 'wght' 400, 'GRAD' 0, 'opsz' var(--_opsz) }
+.ds-status-icon--sm{ --_opsz:20; width:var(--ds-status-icon-size-sm); height:var(--ds-status-icon-size-sm) }
+.ds-status-icon--sm .ds-icon{ font-size:var(--ds-status-icon-glyph-sm) }
+
+.ds-status-icon--inactive{ --_fill:0; color:var(--ds-neutral-variant-30) } /* = glifo "circle" contorno. [AA] Figma usa #a6a6a8 = 2.41:1, por debajo del 3:1 que pide WCAG 1.4.11 para gráficos con significado → Neutral variant 30 #67676a (5.64:1), el mismo tono que la bolita numerada inactiva */
+.ds-status-icon--active{ --_fill:0; color:var(--ds-color-primary) } /* = glifo "circle", contorno azul #007eb6 */
+.ds-status-icon--incomplete{ color:var(--ds-color-warning) } /* = glifo "error" relleno, naranja #e38a05 */
+.ds-status-icon--complete{ color:var(--ds-color-primary) } /* = glifo "check_circle" relleno, azul #007eb6 */
+.ds-status-icon--error{ color:var(--ds-color-text-danger) } /* = glifo "warning" relleno, rojo #a60001 (no confundir con --ds-color-border-danger, es un rojo distinto) */
+.ds-status-icon--disabled{ opacity:.4 }
+
+.ds-status-icon-label{ display:inline-flex; align-items:center; gap:var(--ds-space-8); font-family:var(--ds-font-family); font-size:var(--ds-body-lg-size); color:var(--ds-color-text-default) }
+
+/* ==========================================================
+   AVATAR — página "Avatar" (nodo 425:42573)
+   Representa un usuario/entidad: iniciales, imagen o ícono genérico.
+   Size 40px confirmado real (único con instancia expandida en Figma);
+   32px aparece solo como columna "Size" sin instancia — se trata acá
+   como el --sm equivalente del resto de la librería (no 100% confirmado).
+   Estructura: <span class="ds-avatar">OP</span>
+   <span class="ds-avatar"><img class="ds-avatar__img" src="…" alt=""></span>
+   <span class="ds-avatar"><span class="ds-icon">person</span></span>
+   <span class="ds-avatar ds-avatar--badge">OP<span class="ds-avatar__badge"></span></span>
+   ========================================================== */
+
+.ds-avatar{
+  display:inline-flex; align-items:center; justify-content:center; position:relative; flex-shrink:0;
+  width:var(--ds-avatar-size); height:var(--ds-avatar-size); border-radius:var(--ds-radius-full);
+  background:var(--ds-color-primary); color:#ffffff; overflow:hidden;
+  font-family:var(--ds-font-family); font-size:var(--ds-body-lg-size); line-height:var(--ds-body-lg-lh); font-weight:var(--ds-font-weight-regular);
+}
+.ds-avatar--sm{ width:var(--ds-avatar-size-sm); height:var(--ds-avatar-size-sm) } /* ver nota arriba — no confirmado al 100% */
+.ds-avatar__img{ width:100%; height:100%; object-fit:cover }
+.ds-avatar .ds-icon{ color:#ffffff; font-size:24px }
+.ds-avatar__badge{
+  position:absolute; top:2px; right:0; width:var(--ds-avatar-badge-size); height:var(--ds-avatar-badge-size);
+  border-radius:50%; background:#ffffff; display:flex; align-items:center; justify-content:center;
+} /* confirmado real: NO es bottom-right (como en otros DS) — el borde blanco queda arriba-derecha, apenas montado sobre el borde del círculo */
+.ds-avatar__badge::after{ content:''; width:var(--ds-avatar-badge-dot); height:var(--ds-avatar-badge-dot); border-radius:50%; background:var(--ds-color-success) } /* = badge/success/bg #00854d */
+
+/* ==========================================================
+   ICON CONTAINER — página "Icon container" (nodo 7728:8789)
+   "Adorno" cuadrado o redondo detrás de un ícono — NO es clickeable
+   (eso es IconButton, ya documentado). 9 colores × Low/High-Contrast ×
+   Square/Round × 4 tamaños (xs/s/m/l). Confirmado con get_design_context
+   sobre las 144 variantes reales (tokens --adorment/<color>/bg|icon).
+   Estructura: <span class="ds-iconctr ds-iconctr--cyan"><span class="ds-icon">info</span></span>
+   ========================================================== */
+
+.ds-iconctr{
+  --_size:var(--ds-iconctr-size-md); --_pad:var(--ds-iconctr-pad-md); --_glyph:var(--ds-iconctr-glyph-md);
+  --_bg:var(--ds-color-secondary-container); --_fg:var(--ds-ocean-30); /* = color "blue" (default real de Figma) */
+  display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box;
+  width:var(--_size); height:var(--_size); padding:var(--_pad); border-radius:var(--ds-radius-xs);
+  background:var(--_bg); color:var(--_fg);
+}
+.ds-iconctr .ds-icon{ font-size:var(--_glyph) }
+.ds-iconctr--round{ border-radius:var(--ds-radius-full) }
+.ds-iconctr--xs{ --_size:var(--ds-iconctr-size-xs); --_pad:var(--ds-iconctr-pad-xs); --_glyph:var(--ds-iconctr-glyph-xs) } /* xs = único con radius-xs real en Square; el resto usa radius-s (8px) */
+.ds-iconctr--sm{ --_size:var(--ds-iconctr-size-sm); --_pad:var(--ds-iconctr-pad-sm); --_glyph:var(--ds-iconctr-glyph-sm) }
+.ds-iconctr--lg{ --_size:var(--ds-iconctr-size-lg); --_pad:var(--ds-iconctr-pad-lg); --_glyph:var(--ds-iconctr-glyph-lg) }
+.ds-iconctr:not(.ds-iconctr--xs):not(.ds-iconctr--round){ border-radius:var(--ds-radius-s) } /* small/medium/large Square = 8px confirmado; xs Square = 4px */
+
+/* color — Low-Contrast (fondo claro + ícono saturado), confirmado real */
+.ds-iconctr--blue{ --_bg:var(--ds-color-secondary-container); --_fg:var(--ds-ocean-30) }       /* #e3eaef / #003146 */
+.ds-iconctr--cyan{ --_bg:var(--ds-sky-95); --_fg:var(--ds-color-primary) }                       /* #d9f4ff / #007eb6 */
+.ds-iconctr--rose{ --_bg:var(--ds-color-rose-container); --_fg:var(--ds-rose-30) }               /* #fbeef3 / #ab6787 */
+.ds-iconctr--violet{ --_bg:var(--ds-color-tertiary-container); --_fg:var(--ds-tertiary-30) }     /* #efecf2 / #6c5681 */
+.ds-iconctr--aqua{ --_bg:var(--ds-color-aqua-container); --_fg:var(--ds-aqua-30) }                /* #e7f0f0 / #007371 */
+.ds-iconctr--green{ --_bg:var(--ds-color-success-container); --_fg:var(--ds-success-30) }        /* #daf2df / #20562d */
+.ds-iconctr--orange{ --_bg:var(--ds-warning-95); --_fg:var(--ds-warning-40) }                     /* #fee6c3 / #bd7304 */
+.ds-iconctr--disabled{ --_bg:var(--ds-neutral-90); --_fg:var(--ds-color-text-disabled) }         /* #b6b5b5 */
+
+/* --contrast = High-Contrast (fondo saturado + ícono blanco), confirmado real */
+.ds-iconctr--contrast{ --_fg:#ffffff }
+.ds-iconctr--contrast.ds-iconctr--blue{ --_bg:var(--ds-ocean-30) }
+.ds-iconctr--contrast.ds-iconctr--cyan{ --_bg:var(--ds-color-primary) }
+.ds-iconctr--contrast.ds-iconctr--rose{ --_bg:var(--ds-rose-30) }
+.ds-iconctr--contrast.ds-iconctr--violet{ --_bg:var(--ds-tertiary-30) }
+.ds-iconctr--contrast.ds-iconctr--aqua{ --_bg:var(--ds-aqua-30) }
+.ds-iconctr--contrast.ds-iconctr--green{ --_bg:var(--ds-success-30) }
+.ds-iconctr--contrast.ds-iconctr--orange{ --_bg:var(--ds-color-warning) }
+.ds-iconctr--contrast.ds-iconctr--disabled{ --_bg:var(--ds-neutral-90) } /* disabled no tiene variante high-contrast distinta */
+/* ==========================================================
+   LOADER (isologo de marca) — Figma "Spinner, loader" (nodos
+   12200:19582 "SpinnerLoadingBig" y 12371:43028 "LoadingIsologo")
+   Pantalla de carga de marca: la silueta del isologotipo del Banco
+   (zorro/mundo) se "llena" con dos olas de color que suben y bajan
+   dentro de su propia silueta (confirmado bajando los 2 frames reales:
+   mismo path exterior + una máscara + 2 blobs que cambian de posición
+   Y y de color gris/vacío → azul primary + navy de marca).
+   SIMPLIFICADO: Figma anima el PATH de las olas cuadro a cuadro
+   (morph); acá solo se anima la posición (transform translateY), no
+   la forma — interpolar paths a mano en CSS puro no es viable/mantenible.
+   Estructura: <span class="ds-loader-brand" role="status" aria-label="Cargando">(svg)</span>
+   ========================================================== */
+
+.ds-loader-brand{ display:inline-block; width:var(--ds-loader-brand-w); height:var(--ds-loader-brand-h) }
+.ds-loader-brand svg{ display:block; width:100%; height:100% }
+.ds-loader-brand__silhouette{ fill:var(--ds-neutral-variant-95) } /* Figma: #E4E4E4, fuera de paleta → Neutral variant 95 #eaeaea */
+.ds-loader-brand__wave{ animation:ds-loader-wave 1.8s ease-in-out infinite alternate }
+@media (prefers-reduced-motion: reduce){
+  .ds-loader-brand__wave{ animation:none; transform:translateY(0) } /* silueta llena y quieta */
+}
+.ds-loader-brand__blob{ transition:fill .3s }
+.ds-loader-brand__blob--1{ fill:var(--ds-color-primary) } /* = #007eb6, confirmado real */
+.ds-loader-brand__blob--2{ fill:var(--ds-ocean-50) }       /* = #004e70 ≈ #004d71 real, mismo tono de marca ya en fundamentos */
+@keyframes ds-loader-wave{
+  from{ transform:translateY(150px) }
+  to{ transform:translateY(-30px) }
+}
+/* ==========================================================
+   LINK — página "Link" (nodo 6114:1855)
+   Ancla de texto reusada ya por Select/Upload/Breadcrumb. Tamaños
+   reales Large(16px)/Medium(14px, default)/Small(12px). Estilos
+   Default (azul) / Subtle (texto oscuro, subraya solo en hover).
+   Estructura: <a class="ds-link" href="#">Link</a>
+   <a class="ds-link" href="#">Link <span class="ds-icon">open_in_new</span></a>
+   ========================================================== */
+
+.ds-link{
+  display:inline-flex; align-items:center; gap:4px; font-family:var(--ds-font-family);
+  font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */; text-decoration:none;
+  cursor:pointer; border-radius:var(--ds-radius-xs);
+  font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); /* = Medium, tamaño default real */
+}
+.ds-link:hover{ text-decoration:underline }
+.ds-link:focus-visible{ outline:2px solid var(--ds-color-primary); outline-offset:2px } /* = borde 2px real; outline en vez de border para no mover el layout */
+.ds-link--subtle{ color:var(--ds-color-text-default) }
+.ds-link--subtle:focus-visible{ outline-color:var(--ds-color-text-default) }
+.ds-link--lg{ font-size:var(--ds-body-lg-size); line-height:var(--ds-body-lg-lh) }
+.ds-link--sm{ font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh) }
+.ds-link .ds-icon{ font-size:16px }
+
+/* ==========================================================
+   BREADCRUMB — página "Breadcrumb" (nodo 1087:27855)
+   Lista de .ds-link separados por "/" (texto) o un chevron (ícono).
+   El último tramo (página actual) es un chip relleno azul — confirmado
+   real en el ejemplo principal de Figma (no es texto plano gris).
+   Estructura: <nav class="ds-breadcrumb">
+   <a class="ds-link" href="#">Link</a><span class="ds-breadcrumb__sep">/</span>
+   <a class="ds-link" href="#">Link</a><span class="ds-breadcrumb__sep">/</span>
+   <span class="ds-breadcrumb__current">Text</span></nav>
+   ========================================================== */
+
+.ds-breadcrumb{ display:flex; align-items:center; gap:var(--ds-space-8); font-family:var(--ds-font-family) }
+.ds-breadcrumb__sep{ color:var(--ds-color-text-subtle); font-size:var(--ds-body-lg-size); line-height:1 }
+.ds-breadcrumb__sep.ds-icon{ font-size:16px } /* variante separador=ícono (chevron_right) */
+/* Tramos navegables: texto OSCURO semibold, no azul — verificado en el nodo 1088:35139,
+   donde los <Link> internos se pintan con Text/primary #232222, no con el azul del Link suelto. */
+.ds-breadcrumb__link{
+  display:inline-flex; align-items:center; padding:4px var(--ds-space-8); border-radius:var(--ds-radius-full);
+  color:var(--ds-color-text-default); font-weight:var(--ds-font-weight-semibold);
+  font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); text-decoration:none;
+}
+.ds-breadcrumb__link:hover{ background:var(--ds-sky-99); text-decoration:underline } /* Figma: Button/Link/background-hover #007eb614 (8%) → Blue Sky 99, tono de paleta equivalente */
+.ds-breadcrumb__link:active{ background:var(--ds-sky-95) }                           /* Figma: Button/Link/background-pressed #007eb629 (16%) */
+/* Página actual: píldora celeste con texto azul (NO azul sólido con texto blanco).
+   [AA] Figma usa el 16% de #007eb6 de fondo con texto #007eb6 encima = 3.47:1, que no pasa AA.
+   Se sube a Blue Sky 95 #d9f4ff (= Interaction/selected, tono real del sistema) con texto
+   Blue Sky 40 #0072a4 = 4.65:1. */
+.ds-breadcrumb__current{
+  display:inline-flex; align-items:center; padding:4px var(--ds-space-8); border-radius:var(--ds-radius-full);
+  background:var(--ds-sky-95); color:var(--ds-color-text-link); font-weight:var(--ds-font-weight-semibold);
+  font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh);
+}
+.ds-breadcrumb__collapse{
+  display:inline-flex; align-items:center; justify-content:center; width:24px; height:16px;
+  border-radius:2px; background:var(--ds-color-background); color:var(--ds-color-text-default);
+} /* = "…" cuando el camino es muy largo (separador colapsado) */
+.ds-breadcrumb__collapse .ds-icon{ font-size:16px }
+
+/* ==========================================================
+   LINK-ITEM — página "Link-Item" (nodo 8742:12767)
+   Ítem de navegación usado dentro de LeftNav (abajo). Height=Tall
+   (44px) confirmado real / Compact (36px). Selected = fondo sky-95 +
+   texto azul bold — no gris con borde, confirmado real.
+   Estructura: <button class="ds-link-item is-selected">
+   <span class="ds-icon">home</span>List item</button>
+   ========================================================== */
+
+.ds-link-item{
+  display:flex; align-items:center; gap:var(--ds-space-8); width:100%; min-width:180px; box-sizing:border-box;
+  padding:8px var(--ds-space-8) 8px var(--ds-space-16); border-radius:var(--ds-radius-s); border:none; background:transparent;
+  cursor:pointer; text-align:left; font-family:var(--ds-font-family); color:var(--ds-color-text-default);
+  font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh);
+}
+.ds-link-item .ds-icon{ color:inherit; font-size:16px; flex-shrink:0; font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 } /* opsz al piso soportado — sin esto el glifo (ej. "language") se ve con trazos desbalanceados/no centrados ópticamente dentro de su caja de 16px */
+.ds-link-item:hover{ background:var(--ds-neutral-99) }
+.ds-link-item.is-selected{ background:var(--ds-sky-95); color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */; font-weight:var(--ds-font-weight-bold) }
+.ds-link-item:disabled{ color:var(--ds-color-text-disabled); cursor:not-allowed }
+.ds-link-item--compact{ padding-top:6px; padding-bottom:6px }
+.ds-link-item__text{ flex:1; display:flex; flex-direction:column; min-width:0 }
+.ds-link-item__secondary{ font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh); color:var(--ds-color-text-subtle); font-weight:var(--ds-font-weight-regular) } /* Figma: rgba(0,0,0,.6), que no es color de paleta → text-subtle #555353 */
+
+/* Link-Item-Slim — icono solo, usado en LeftNav colapsado */
+.ds-link-item-slim{
+  display:inline-flex; align-items:center; justify-content:center; width:48px; height:36px;
+  border:none; background:transparent; border-radius:var(--ds-radius-s); cursor:pointer; color:var(--ds-neutral-variant-20);
+}
+.ds-link-item-slim .ds-icon{ font-size:16px; color:inherit; font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 }
+.ds-link-item-slim:hover{ background:var(--ds-neutral-variant-95) } /* confirmado con screenshot real del nodo — es gris CLARO con ícono oscuro, no oscuro con ícono blanco como sugería el nombre de variable "icon/hover" en el código generado */
+.ds-link-item-slim.is-selected{ background:var(--ds-sky-95); color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */ }
+.ds-link-item-slim.is-selected .ds-icon{ font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20 }
+.ds-link-item-slim:disabled{ opacity:.4; cursor:not-allowed }
+
+/* ==========================================================
+   TOPNAV — página "TopNav-header" (nodo 4278:8885)
+   Barra superior: logo + links + [buscador] + iconos/avatar. Estilos
+   reales White (fondo blanco, borde inferior #f3f3f3) / Blue (fondo
+   --ds-ocean-50 #004e70, texto blanco, link activo = pill translúcido).
+   Estructura: <header class="ds-topnav">
+   <div class="ds-topnav__logo">…</div>
+   <nav class="ds-topnav__links"><a class="ds-topnav__link is-active" href="#">Link</a>…</nav>
+   <div class="ds-topnav__actions">…</div></header>
+   ========================================================== */
+
+.ds-topnav{
+  display:flex; align-items:center; gap:var(--ds-space-48); height:72px; padding:0 var(--ds-space-16); /* Figma: Content-area gap 48 */
+  background:#ffffff; border-bottom:1px solid var(--ds-neutral-99); font-family:var(--ds-font-family);
+}
+.ds-topnav__logo{ display:flex; align-items:center; gap:34px; /* Figma: Logo+ProductName gap 34 */ font-weight:var(--ds-font-weight-bold); font-size:20px; color:var(--ds-color-text-default); flex-shrink:0 }
+.ds-topnav__links{ display:flex; align-items:center; gap:var(--ds-space-16); flex:1; height:42px }
+.ds-topnav__link{
+  display:inline-flex; align-items:center; padding:var(--ds-space-8) var(--ds-space-16); border-radius:var(--ds-radius-full);
+  font-family:inherit; font-weight:var(--ds-font-weight-semibold); font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh);
+  color:var(--ds-neutral-50); text-decoration:none; white-space:nowrap;
+}
+.ds-topnav__link.is-active{ background:rgba(0,0,0,.08) } /* = equivalente claro del "fondo pill" real (que en inverse es rgba(255,255,255,.29)) */
+.ds-topnav__actions{ display:flex; align-items:center; gap:var(--ds-space-16); flex-shrink:0 }
+.ds-topnav__lang{ display:inline-flex; align-items:center; gap:8px; font-weight:var(--ds-font-weight-bold); font-size:var(--ds-body-sm-size); color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */; background:none; border:none; cursor:pointer; font-family:inherit }
+.ds-topnav__lang .ds-icon{ font-size:16px }
+.ds-topnav__badge-wrap{ position:relative; display:inline-flex }
+.ds-topnav__badge{
+  position:absolute; top:0; right:0; min-width:20px; height:20px; padding:0 6.5px; border-radius:var(--ds-radius-full);
+  background:var(--ds-color-primary); color:#ffffff; font-size:11px; font-weight:var(--ds-font-weight-semibold);
+  display:flex; align-items:center; justify-content:center; font-family:var(--ds-font-family);
+}
+
+/* --inverse = estilo Blue (fondo oscuro de marca) */
+.ds-topnav--inverse{ background:var(--ds-ocean-50); border-bottom:none }
+.ds-topnav--inverse .ds-topnav__logo, .ds-topnav--inverse .ds-topnav__link{ color:#ffffff }
+.ds-topnav--inverse .ds-topnav__link.is-active{ background:rgba(255,255,255,.29) }
+.ds-topnav--inverse .ds-topnav__lang{ color:#ffffff }
+.ds-topnav--inverse .ds-iconbtn{ color:#ffffff }
+.ds-topnav--inverse .ds-iconbtn:hover{ background:rgba(255,255,255,.12) }
+.ds-topnav--inverse .ds-avatar{ background:#ffffff; color:var(--ds-ocean-50) }
+
+/* ==========================================================
+   FOOTER — página "TopNav-header" (nodo 12334:2070, type=Footer)
+   Barra inferior: links + logo del Banco. Mismo patrón de .ds-topnav
+   pero sin acciones a la derecha — el logo reemplaza esa zona.
+   Estructura: <footer class="ds-footer">
+   <nav class="ds-footer__links"><a href="#">Link</a>…</nav>
+   <img class="ds-footer__logo" src="…" alt="IDB"></footer>
+   ========================================================== */
+
+.ds-footer{ display:flex; align-items:center; gap:var(--ds-space-24); height:72px; padding:0 80px; background:#ffffff; font-family:var(--ds-font-family) }
+.ds-footer__links{ display:flex; align-items:center; gap:var(--ds-space-16); flex:1 }
+.ds-footer__links a{ font-family:inherit; font-weight:var(--ds-font-weight-semibold); font-size:var(--ds-body-md-size); color:var(--ds-neutral-50); text-decoration:none; white-space:nowrap }
+.ds-footer__logo{ height:32px; flex-shrink:0 }
+.ds-footer--inverse{ background:var(--ds-ocean-50) }
+.ds-footer--inverse .ds-footer__links a{ color:#ffffff }
+
+/* ==========================================================
+   LEFTNAV — página "LeftNav" (nodo 6540:11885)
+   Sidebar de navegación. Default 256px (header + lista + idioma +
+   footer de usuario) / Slim 92px (todo lo mismo, solo íconos — reusa
+   .ds-link-item-slim ya documentado). Reusa .ds-link-item y .ds-avatar.
+   Estructura: <aside class="ds-leftnav">
+   <div class="ds-leftnav__header"><span class="ds-icon">arrow_back</span>ProductName</div>
+   <div class="ds-leftnav__content"><span class="ds-leftnav__subheader">SUBHEADER</span>
+   <button class="ds-link-item is-selected">…</button>…</div>
+   <div class="ds-leftnav__lang">…</div>
+   <div class="ds-leftnav__footer">…</div></aside>
+   ========================================================== */
+
+.ds-leftnav{ display:flex; flex-direction:column; width:256px; background:#ffffff; border:1px solid var(--ds-color-border-subtle); font-family:var(--ds-font-family) }
+.ds-leftnav__header{
+  display:flex; align-items:center; gap:var(--ds-space-8); height:60px; padding:0 var(--ds-space-16);
+  border-bottom:1px solid var(--ds-color-border-subtle); font-weight:var(--ds-font-weight-bold); font-size:18px; color:var(--ds-ocean-50);
+}
+.ds-leftnav__header .ds-icon{ color:var(--ds-neutral-variant-20); font-size:24px }
+.ds-leftnav__content{ display:flex; flex-direction:column; gap:10px; flex:1; min-height:0; padding:var(--ds-space-24) 12px; overflow-y:auto }
+.ds-leftnav__subheader{ padding:0 var(--ds-space-16); font-size:var(--ds-label-sm-size); line-height:var(--ds-label-sm-lh); font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-subtle); text-transform:uppercase }
+.ds-leftnav__lang{ margin-top:auto; display:flex; flex-direction:column; gap:10px }
+.ds-leftnav__version{ padding:0 var(--ds-space-12); text-align:center; font-size:var(--ds-label-sm-size); line-height:var(--ds-label-sm-lh); font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-subtlest) }
+.ds-leftnav__footer{ display:flex; align-items:center; gap:var(--ds-space-12); height:64px; padding:0 var(--ds-space-16); border-top:1px solid var(--ds-color-border-subtle); cursor:pointer }
+.ds-leftnav__footer-text{ flex:1; min-width:0; display:flex; flex-direction:column }
+.ds-leftnav__footer-eyebrow{ font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh); color:var(--ds-color-text-subtle) }
+.ds-leftnav__footer-name{ font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); color:var(--ds-color-text-default) }
+.ds-leftnav__footer .ds-icon{ font-size:16px; color:var(--ds-neutral-variant-20); flex-shrink:0 }
+
+/* --slim */
+.ds-leftnav--slim{ width:92px }
+.ds-leftnav--slim .ds-leftnav__header{ justify-content:center; padding:0 }
+.ds-leftnav--slim .ds-leftnav__content{ align-items:center; padding:var(--ds-space-24) 8px }
+.ds-leftnav--slim .ds-leftnav__subheader{ text-align:center; padding:0 }
+.ds-leftnav--slim .ds-leftnav__footer{ justify-content:center; padding:0 }
+.ds-leftnav--slim .ds-leftnav__lang{ align-items:center } /* bug real: sin esto, el botón de 48px (ancho fijo) quedaba flex-start (pegado a la izquierda) en vez de centrado, porque align-items:stretch no centra un hijo con ancho explícito */
+
+/* ==========================================================
+   STEPPER — páginas "Stepper" (nodo 540:11954, horizontal) y "Step"
+   (nodo 540:11813, states) — usado por LeftNav Stepper.
+   CORREGIDO: la bolita NO es el átomo Icon Status (circle/check_circle)
+   como se había armado antes — es un círculo de 20px con un NÚMERO
+   adentro (blanco, bold 12px), gris #a6a6a8 si inactivo, azul primary
+   si activo/completado. Solo Incomplete/Error sí reusan Icon Status
+   (glifos "error"/"warning" rellenos, ya documentados) en vez de número.
+   Estructura (vertical, LeftNav): <div class="ds-stepper">
+   <div class="ds-step ds-step--active"><span class="ds-step__dot">1</span>
+   <div class="ds-step__content"><p class="ds-step__title">Step title</p><p class="ds-step__subtitle">Optional</p></div></div>
+   <div class="ds-stepper__connector"></div>…</div>
+   Horizontal: <div class="ds-stepper ds-stepper--h">…mismo .ds-step, conector = <div class="ds-stepper__connector--h"></div></div>
+   ========================================================== */
+
+.ds-stepper{ display:flex; flex-direction:column; width:100%; font-family:var(--ds-font-family) }
+.ds-stepper--h{ flex-direction:row; align-items:center }
+/* El fondo se declara acá (no en un style inline del template): un `background` inline le gana a
+   las clases y dejaba invisibles a Hover y Selected. */
+.ds-step{
+  display:flex; align-items:center; gap:var(--ds-space-8); padding:var(--ds-space-8); width:100%;
+  border-radius:var(--ds-radius-s); box-sizing:border-box; background:transparent; border:none;
+  text-align:left; font:inherit; color:inherit;
+}
+button.ds-step{ cursor:pointer }
+/* En horizontal el botón deja de estirarse al 100% de la fila: lo hacía un `style="width:100%"`
+   inline en el template, que un `width:auto` de clase no puede ganarle — se sacó del template. */
+.ds-stepper--h .ds-step{ width:auto; flex-shrink:0 }
+.ds-step__dot{
+  display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+  width:20px; height:20px; border-radius:50%; background:var(--ds-neutral-variant-30); /* [AA] Figma: #a6a6a8 da 2.43:1 con el número blanco → Neutral variant 30 #67676a (5.64:1) */
+  color:#ffffff; font-family:var(--ds-font-family); font-weight:var(--ds-font-weight-bold); font-size:12px; line-height:16px;
+}
+.ds-step--active .ds-step__dot, .ds-step--completed .ds-step__dot{ background:var(--ds-color-primary) } /* = surface/primary #007eb6, confirmado: Active y Completed se ven IGUAL en este átomo */
+.ds-step__content{ display:flex; flex-direction:column; flex:1; min-width:0 }
+.ds-stepper--h .ds-step__content{ flex:none }
+/* Sin nowrap por default: en vertical (el uso real, LeftNav) el título y la descripción son texto
+   largo y tienen que poder hacer wrap — confirmado en Figma (contenido vertical: `w-full`, sin
+   whitespace-nowrap; solo el horizontal lo fuerza, porque ahí los títulos son una palabra corta). */
+.ds-step__title{ margin:0; font-weight:var(--ds-font-weight-bold); font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); color:var(--ds-color-text-default) }
+.ds-step__subtitle{ margin:0; font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh); color:var(--ds-color-text-subtle) }
+.ds-stepper--h .ds-step__title, .ds-stepper--h .ds-step__subtitle{ white-space:nowrap }
+.ds-step--inactive .ds-step__title, .ds-step--inactive .ds-step__subtitle{ color:var(--ds-color-text-subtlest) } /* [AA] Figma: disabled #929090 (3.17:1); un paso pendiente es información, no un control deshabilitado → Neutral 70 #6d6b6b (5.30:1) */
+.ds-step--error .ds-step__title, .ds-step--error .ds-step__subtitle{ color:var(--ds-error-30) } /* = #790001, confirmado real */
+/* Type=Hover / Type=Selected del nodo 540:11813. La clase estática existe para documentarlo;
+   `:hover` es lo que lo hace real cuando el paso es un botón. Selected va después para ganarle. */
+.ds-step--hover, .ds-step:hover{ background:var(--ds-neutral-variant-95) } /* = interaction/background-hover #eaeaea */
+.ds-step--selected, .ds-step--selected:hover{ background:var(--ds-sky-95) } /* = interaction/selected #d9f4ff */
+
+/* conectores */
+.ds-stepper__connector{ width:24px; height:16px; display:flex; justify-content:center; flex-shrink:0 } /* vertical, entre pasos */
+.ds-stepper__connector::after{ content:''; width:1px; background:var(--ds-neutral-variant-50) }
+.ds-stepper__connector--h{ flex:1; height:1px; min-width:24px; background:var(--ds-neutral-variant-50) } /* horizontal, entre pasos */
+
+/* Botón de ícono interno (filas del File Uploader). Para botones de ícono en pantallas usar matIconButton. */
+.ds-iconbtn{
+  width:var(--ds-iconbtn-size); height:var(--ds-iconbtn-size); border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:transparent; border:none; color:var(--ds-neutral-variant-20); cursor:pointer; /* = Icon/default #535354 */
+  transition:background-color .15s;
+}
+.ds-iconbtn:hover{ background:rgba(83,83,84,0.08) }    /* = Icon/hover #53535414 */
+.ds-iconbtn:active{ background:rgba(83,83,84,0.16) }
+.ds-iconbtn:disabled{ color:var(--ds-color-text-disabled); cursor:not-allowed; background:none }
+.ds-iconbtn--outlined{ border:1px solid var(--ds-neutral-variant-50) } /* = Border/Normal #a6a6a8 */
+.ds-iconbtn--sm{ width:var(--ds-iconbtn-size-sm); height:var(--ds-iconbtn-size-sm) }
+.ds-iconbtn .ds-icon{ font-size:24px }
+.ds-iconbtn--sm .ds-icon{ font-size:16px; font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 } /* opsz debe seguir el tamaño real del glifo (eje óptico de la fuente variable) o se ve desproporcionado */
+.ds-upload__card:has(input:focus-visible){ outline:2px solid var(--ds-color-border-focus); outline-offset:2px } /* el input de archivo está oculto visualmente: el foco se muestra en la tarjeta */
+
+:root{ --ds-iconbtn-size: 40px; --ds-iconbtn-size-sm: 32px; } /* IconButton medium / small (Figma "IconButton") */
+
+.ds-link-item, .ds-link-item-slim{ text-decoration:none } /* cuando el ítem es un <a>: sin el subrayado nativo del navegador */
+.ds-topnav__logo{ text-decoration:none; color:inherit } /* el logo es un enlace al inicio */
+.ds-topnav__logo img{ display:block }
+.ds-topnav__product{ font-size:var(--ds-body-lg-size); line-height:var(--ds-body-lg-lh); font-weight:var(--ds-font-weight-regular); color:inherit } /* Figma: Body Large; blanco en inverse */
+
+/* ==========================================================
+   BANNER — página "Banners" (nodo 709:15227)
+   Aviso no disruptivo de ancho completo. Borde izquierdo de 4px del color de la alerta; ícono de
+   estado relleno de 24px; texto Label Large; acción opcional (texto bold) y cerrar opcional.
+   Estructura: <ds-banner color="info" closable>Texto <button dsBannerAction>Acción</button></ds-banner>
+   ========================================================== */
+
+.ds-banner{
+  --_bg:var(--ds-alert-info-bg); --_border:var(--ds-alert-info-border); --_fg:var(--ds-alert-info-fg); --_icon:var(--ds-alert-info-icon);
+  display:flex; align-items:center; gap:var(--ds-space-8); box-sizing:border-box; min-height:56px; width:100%;
+  padding:var(--ds-space-8) 18px; border-left:4px solid var(--_border); border-radius:var(--ds-radius-xs);
+  background:var(--_bg); color:var(--_fg); font-family:var(--ds-font-family);
+  font-size:var(--ds-label-lg-size); line-height:var(--ds-label-lg-lh);
+}
+.ds-banner--success{ --_bg:var(--ds-alert-success-bg); --_border:var(--ds-alert-success-border); --_fg:var(--ds-alert-success-fg); --_icon:var(--ds-alert-success-icon) }
+.ds-banner--warning{ --_bg:var(--ds-alert-warning-bg); --_border:var(--ds-alert-warning-border); --_fg:var(--ds-alert-warning-fg); --_icon:var(--ds-alert-warning-icon) }
+.ds-banner--error{ --_bg:var(--ds-alert-error-bg); --_border:var(--ds-alert-error-border); --_fg:var(--ds-alert-error-fg); --_icon:var(--ds-alert-error-icon) }
+.ds-banner--multiline{ align-items:flex-start; padding-block:var(--ds-space-12) }
+.ds-banner--multiline .ds-banner__actions, .ds-banner--multiline .ds-banner__close{ align-self:flex-start }
+.ds-banner__icon{ flex-shrink:0; font-size:24px; color:var(--_icon); font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+.ds-banner__text{ flex:1; min-width:0 }
+.ds-banner__actions{ display:inline-flex; align-items:center; flex-shrink:0 }
+/* Acción: botón de texto (Figma `.ActionButton-Light`): 10px × 12px, radio total, Body Medium Bold */
+.ds-banner [dsBannerAction], .ds-snackbar__action{
+  display:inline-flex; align-items:center; justify-content:center; padding:10px 12px; border:none; border-radius:var(--ds-radius-full);
+  background:transparent; color:inherit; cursor:pointer; font:inherit; font-weight:var(--ds-font-weight-bold);
+  font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); transition:background-color .15s;
+}
+.ds-banner [dsBannerAction]:hover, .ds-snackbar__action:hover{ background:color-mix(in srgb, currentColor 8%, transparent) }
+.ds-banner [dsBannerAction]:active, .ds-snackbar__action:active{ background:color-mix(in srgb, currentColor 16%, transparent) }
+.ds-banner [dsBannerAction]:focus-visible, .ds-snackbar__action:focus-visible, .ds-banner__close:focus-visible, .ds-snackbar__close:focus-visible{
+  outline:2px solid currentColor; outline-offset:2px;
+}
+.ds-banner__close, .ds-snackbar__close{ color:inherit; flex-shrink:0 }
+.ds-banner__close:hover, .ds-snackbar__close:hover{ background:color-mix(in srgb, currentColor 8%, transparent) }
+.ds-banner__close:active, .ds-snackbar__close:active{ background:color-mix(in srgb, currentColor 16%, transparent) }
+
+/* ==========================================================
+   SNACKBAR — página "Snackbar" (nodo 478:7634)
+   Mensaje breve y flotante. High-contrast: fondo saturado y texto blanco (Label Large SemiBold).
+   Low-contrast: fondo claro y texto oscuro (Label Large Regular). 344px, radio 4px, Shadow-medium.
+   Se abre con MatSnackBar (`openDsSnackbar`); el contenedor de Material queda transparente.
+   ========================================================== */
+
+.ds-snackbar{
+  --_bg:var(--ds-snackbar-default-bg); --_fg:var(--ds-color-text-white); --_icon:var(--ds-color-text-white);
+  display:flex; align-items:center; gap:var(--ds-space-8); box-sizing:border-box; width:344px; max-width:100%;
+  padding:var(--ds-space-8) var(--ds-space-16); border-radius:var(--ds-radius-xs); box-shadow:var(--ds-shadow-m);
+  background:var(--_bg); color:var(--_fg); font-family:var(--ds-font-family);
+  font-size:var(--ds-label-lg-size); line-height:var(--ds-label-lg-lh); font-weight:var(--ds-font-weight-semibold);
+}
+.ds-snackbar--high.ds-snackbar--success{ --_bg:var(--ds-snackbar-hc-success-bg); --_icon:var(--ds-color-text-white) }
+.ds-snackbar--high.ds-snackbar--warning{ --_bg:var(--ds-snackbar-hc-warning-bg); --_fg:var(--ds-alert-warning-fg); --_icon:var(--ds-alert-warning-fg) }
+.ds-snackbar--high.ds-snackbar--error{ --_bg:var(--ds-snackbar-hc-error-bg); --_icon:var(--ds-color-text-white) }
+.ds-snackbar--low{ font-weight:var(--ds-font-weight-regular) }
+.ds-snackbar--low.ds-snackbar--success, .ds-snackbar--low.ds-snackbar--default{ --_bg:var(--ds-alert-success-bg); --_fg:var(--ds-alert-success-fg); --_icon:var(--ds-alert-success-icon) }
+.ds-snackbar--low.ds-snackbar--warning{ --_bg:var(--ds-alert-warning-bg); --_fg:var(--ds-alert-warning-fg); --_icon:var(--ds-alert-warning-icon) }
+.ds-snackbar--low.ds-snackbar--error{ --_bg:var(--ds-alert-error-bg); --_fg:var(--ds-alert-error-fg); --_icon:var(--ds-alert-error-icon) }
+.ds-snackbar__body{ display:flex; align-items:center; gap:var(--ds-space-8); flex:1; min-width:0 }
+.ds-snackbar__icon{ flex-shrink:0; font-size:24px; color:var(--_icon); font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+.ds-snackbar__text{ flex:1; min-width:0 }
+.ds-snackbar__controls{ display:inline-flex; align-items:center; flex-shrink:0 }
+.ds-snackbar--stacked{ flex-direction:column; align-items:stretch; gap:0 }
+.ds-snackbar--stacked .ds-snackbar__controls{ justify-content:flex-end }
+
+/* ==========================================================
+   FAVORITE TOGGLE — página "Favorite Toggle" (nodo 5547:5437)
+   32px, estrella de 24px. Estados: no seleccionado (contorno), seleccionado (relleno), hover/pressed (círculo 8% / 12%).
+   [AA] Figma: contorno #bcbcbe (1.8:1) → Neutral variant 40 #919193 (3.15:1); relleno #e38a05 (2.66:1) → Warning 40 #bd7304 (3.38:1).
+   Figma pinta la estrella seleccionada de la variante "standard" en gris #535354 (y en naranja al hacer hover): se
+   toma como error de diseño y se usa naranja en los dos casos (ver HUECOS-DEL-SISTEMA.md).
+   ========================================================== */
+.ds-fav{
+  --_star:var(--ds-neutral-variant-40); --_on:var(--ds-warning-40); --_hover:rgba(83,83,84,0.08); --_press:rgba(83,83,84,0.12);
+  width:32px; height:32px; padding:0; border:none; border-radius:50%; background:transparent; color:var(--_star); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; transition:background-color .15s;
+}
+.ds-fav .ds-icon{ font-size:24px; font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+.ds-fav--on{ color:var(--_on) }
+.ds-fav--on .ds-icon, .ds-fav:hover .ds-icon{ font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+.ds-fav:hover{ background:var(--_hover); color:var(--_on) }
+.ds-fav:active{ background:var(--_press) }
+.ds-fav:focus-visible{ outline:2px solid var(--ds-color-border-focus); outline-offset:2px }
+.ds-fav--inverse .ds-fav{ --_star:var(--ds-color-text-white); --_on:var(--ds-warning-50); --_hover:rgba(255,255,255,0.08); --_press:rgba(255,255,255,0.12) }
+.ds-fav--inverse .ds-fav:focus-visible{ outline-color:var(--ds-color-text-white) }
+
+/* ==========================================================
+   POPOVER — página "Tooltip /Popover" (nodo 7113:8473)
+   312px, radio 4px, Shadow-medium. Título Body Medium Bold (padding 12/16/4), contenido libre, acciones (32px, gap 8).
+   ========================================================== */
+.ds-popover{
+  display:flex; flex-direction:column; gap:var(--ds-space-8); box-sizing:border-box; width:312px; max-width:100%; overflow:hidden;
+  padding-bottom:var(--ds-space-12); background:var(--ds-color-surface); color:var(--ds-color-text-default);
+  border-radius:var(--ds-radius-xs); box-shadow:var(--ds-shadow-m); font-family:var(--ds-font-family);
+}
+.ds-popover__title{ margin:0; padding:12px 16px 4px; font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); font-weight:var(--ds-font-weight-bold) }
+.ds-popover__body{ padding:0 16px; font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh) }
+.ds-popover__actions{ display:flex; align-items:center; gap:var(--ds-space-8); min-height:32px; padding:0 var(--ds-space-16) }
+.ds-popover__actions:not(:has(*)){ display:none }
+.mat-mdc-menu-panel.ds-popover-menu{ max-width:none; min-width:0; background:transparent; box-shadow:none; overflow:visible }
+.mat-mdc-menu-panel.ds-popover-menu .mat-mdc-menu-content{ padding:0 }
+
+/* ==========================================================
+   MINI CARD — página "MiniCard" (nodo 6037:6934)
+   486px, Shadow-xs. Cuerpo blanco (borde Subtle, radio 8, padding 16×24); pie opcional con franja de color (48px,
+   Label Small SemiBold). Los colores del pie vienen de MD3 Tokens/*-container; la línea de acento es un SVG en
+   Figma que no se pudo leer: se infiere 2px del color de acento.
+   ========================================================== */
+.ds-mini-card{ display:flex; flex-direction:column; width:486px; max-width:100%; box-shadow:var(--ds-shadow-xs); border-radius:var(--ds-radius-s); font-family:var(--ds-font-family); color:var(--ds-color-text-default) }
+.ds-mini-card__card{ box-sizing:border-box; padding:16px 24px; background:var(--ds-color-surface); border:1px solid var(--ds-color-border-subtle); border-radius:var(--ds-radius-s) }
+.ds-mini-card__card--joined{ border-bottom:none; border-radius:var(--ds-radius-s) var(--ds-radius-s) 0 0 }
+.ds-mini-card__header{ display:flex; align-items:center; gap:var(--ds-space-8); min-height:48px; padding:var(--ds-space-8) 0 }
+.ds-mini-card__header > .ds-icon{ color:var(--ds-neutral-variant-20); flex-shrink:0 }
+.ds-mini-card__titles{ min-width:0 }
+.ds-mini-card__title{ margin:0; font-size:var(--ds-title-md-size); line-height:var(--ds-title-md-lh); font-weight:var(--ds-font-weight-semibold) }
+.ds-mini-card__subtitle{ margin:0; font-size:var(--ds-title-sm-size); line-height:var(--ds-title-sm-lh) }
+.ds-mini-card__actions{ display:flex; align-items:center; gap:var(--ds-space-8); margin-inline-start:auto }
+.ds-mini-card__body{ display:flex; flex-direction:column; gap:var(--ds-space-4); font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh) }
+.ds-mini-card__row{ display:flex; align-items:center; justify-content:space-between; gap:var(--ds-space-8); min-height:30px; border-bottom:1px solid var(--ds-color-border-subtle) }
+.ds-mini-card__row > :first-child{ font-size:var(--ds-label-lg-size); line-height:var(--ds-label-lg-lh); font-weight:var(--ds-font-weight-semibold) }
+.ds-mini-card__footer{
+  --_bg:var(--ds-ocean-95); --_accent:var(--ds-ocean-50);
+  display:flex; align-items:center; gap:var(--ds-space-20); box-sizing:border-box; min-height:48px; padding:var(--ds-space-8) var(--ds-space-24);
+  background:var(--_bg); border:1px solid var(--ds-color-border-subtle); border-top:2px solid var(--_accent); border-radius:0 0 var(--ds-radius-s) var(--ds-radius-s);
+  font-size:var(--ds-label-sm-size); line-height:var(--ds-label-sm-lh); font-weight:var(--ds-font-weight-semibold);
+}
+.ds-mini-card__footer--primary{ --_bg:var(--ds-sky-95); --_accent:var(--ds-sky-50) }
+.ds-mini-card__footer--success{ --_bg:var(--ds-success-95); --_accent:var(--ds-success-50) }
+.ds-mini-card__footer--warning{ --_bg:var(--ds-warning-99); --_accent:var(--ds-warning-50) }
+.ds-mini-card__footer--gray{ --_bg:var(--ds-color-background); --_accent:var(--ds-neutral-variant-80) }
+.ds-mini-card__meta{ display:inline-flex; align-items:center; gap:var(--ds-space-4) }
+.ds-mini-card__meta .ds-icon{ font-size:16px; color:var(--ds-neutral-variant-20) }
+
+/* TopNav — zona derecha (Figma `other elements`, nodo 7157:6234): idioma y workspace son botones de 40px con
+   etiqueta Body Small Bold 12/16 y un ícono de 16px; el buscador global mide 190px. */
+.ds-topnav__small{
+  --mat-button-filled-label-text-size:12px; --mat-button-text-label-text-size:12px;
+  --mat-button-filled-label-text-line-height:16px; --mat-button-text-label-text-line-height:16px;
+}
+.ds-topnav__small .mat-icon{ font-size:16px; width:16px; height:16px }
+.ds-topnav__search{ width:190px; flex-shrink:0 }
+.ds-topnav__search:not(:has(*)){ display:none }

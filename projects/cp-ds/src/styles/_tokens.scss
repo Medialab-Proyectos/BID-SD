@@ -1,0 +1,246 @@
+/* Tokens del Sistema de Diseño CP (BID). Origen: libreria-css/fundamentos.css, verificado contra Figma "CP — Visual Styles". Prefijo --ds-. */
+*, *::before, *::after{ box-sizing:border-box }
+
+:root{
+
+  /* ========== 1. PALETA CRUDA (Core/*) ========== */
+  /* Primary — "Colors/Blue Sky" */
+  --ds-sky-10:#002130; --ds-sky-20:#00425f; --ds-sky-30:#005d86; --ds-sky-40:#0072a4;
+  --ds-sky-50:#007eb6; /* = MD3 Tokens/primary */
+  --ds-sky-60:#009ade; --ds-sky-70:#0eb5ff; --ds-sky-80:#50c9ff; --ds-sky-90:#a6e3ff;
+  --ds-sky-95:#d9f4ff; --ds-sky-99:#eaf9ff; --ds-sky-0:#000000; --ds-sky-100:#ffffff;
+
+  /* Secondary — "Colors/Blue Ocean" */
+  --ds-ocean-0:#000000; --ds-ocean-10:#00141c; --ds-ocean-20:#002738; --ds-ocean-30:#003146;
+  --ds-ocean-40:#003b54; --ds-ocean-50:#004e70; /* = MD3 Tokens/secondary */
+  --ds-ocean-60:#196e8c; --ds-ocean-70:#5e90a8; --ds-ocean-80:#94b4c4; --ds-ocean-90:#cbd8df;
+  --ds-ocean-95:#e3eaef; --ds-ocean-100:#ffffff;
+
+  /* Error — "Core/Error" */
+  --ds-error-0:#000000; --ds-error-10:#2d0000; --ds-error-20:#5a0000; --ds-error-30:#790001;
+  --ds-error-40:#a60001; --ds-error-50:#d83a52; --ds-error-60:#de566b; --ds-error-70:#e37283;
+  --ds-error-80:#e98e9c; --ds-error-90:#eeabb5; --ds-error-95:#f4c7ce; --ds-error-99:#fde7ea;
+  --ds-error-100:#ffffff;
+
+  /* Warning — "Core/Warning" */
+  --ds-warning-0:#000000; --ds-warning-10:#261701; --ds-warning-20:#4c2e02; --ds-warning-30:#804f02;
+  --ds-warning-40:#bd7304; --ds-warning-50:#e38a05; /* = MD3 Tokens/warning */
+  --ds-warning-60:#fa9b0d; --ds-warning-70:#fbae3b; --ds-warning-80:#fcc068; --ds-warning-90:#fdd395;
+  --ds-warning-95:#fee6c3; --ds-warning-99:#fef2e1; --ds-warning-100:#ffffff;
+
+  /* Success — "Core/Success" */
+  --ds-success-0:#000000; --ds-success-10:#08150b; --ds-success-20:#14361c; --ds-success-30:#20562d;
+  --ds-success-40:#286c39; --ds-success-50:#00854d; /* = MD3 Tokens/success */
+  --ds-success-60:#3b9f54; --ds-success-70:#58c172; --ds-success-80:#86d298; --ds-success-90:#b3e3bf;
+  --ds-success-95:#daf2df; --ds-success-99:#f0f9f2; --ds-success-100:#ffffff;
+
+  /* Neutral — "Core/Neutral" */
+  --ds-neutral-0:#000000; --ds-neutral-10:#0a0a0a; --ds-neutral-20:#141414; --ds-neutral-30:#232222;
+  --ds-neutral-40:#323131; --ds-neutral-50:#3c3b3b; /* = Brand Colors/color-brand-gray */
+  --ds-neutral-60:#555353; --ds-neutral-70:#6d6b6b; --ds-neutral-80:#929090; --ds-neutral-90:#b6b5b5;
+  --ds-neutral-99:#f3f3f3; --ds-neutral-100:#ffffff;
+
+  /* Neutral-variant — "Core/Neutral-variant" (usado en bordes) */
+  --ds-neutral-variant-0:#000000; --ds-neutral-variant-10:#29292a; --ds-neutral-variant-20:#535354;
+  --ds-neutral-variant-30:#67676a; --ds-neutral-variant-40:#919193; --ds-neutral-variant-50:#a6a6a8;
+  --ds-neutral-variant-60:#b1b1b3; --ds-neutral-variant-70:#bcbcbe; --ds-neutral-variant-80:#c7c7c9;
+  --ds-neutral-variant-95:#eaeaea; --ds-neutral-variant-100:#ffffff;
+
+  /* Tertiary — "Core/Tertiary" (violeta) */
+  --ds-tertiary-0:#000000; --ds-tertiary-10:#3e314b; --ds-tertiary-20:#58466a; --ds-tertiary-30:#6c5681;
+  --ds-tertiary-40:#7d6395; /* = MD3 Tokens/tertiary */
+  --ds-tertiary-50:#8b6fa7; --ds-tertiary-60:#9274af; --ds-tertiary-70:#b6a6cb; --ds-tertiary-80:#cbc0d7;
+  --ds-tertiary-90:#ded7e5; --ds-tertiary-95:#efecf2; --ds-tertiary-99:#f6f5f8; --ds-tertiary-100:#ffffff;
+
+  /* Rose — "Core/Rose" */
+  --ds-rose-0:#000000; --ds-rose-10:#633b4e; --ds-rose-20:#8b546e; --ds-rose-30:#ab6787;
+  --ds-rose-40:#c5779c; /* = MD3 Tokens/rose */
+  --ds-rose-50:#dc85af; --ds-rose-60:#e78bb7; --ds-rose-70:#eeb2cd; --ds-rose-80:#f2cbdb;
+  --ds-rose-90:#f7dce7; --ds-rose-95:#fbeef3; --ds-rose-99:#fdf6f9; --ds-rose-100:#ffffff;
+
+  /* Aqua — "Core/Aqua" */
+  --ds-aqua-10:#004241; --ds-aqua-20:#005e5c; --ds-aqua-30:#007371; --ds-aqua-40:#008483; /* = MD3 Tokens/aqua */
+  --ds-aqua-50:#009492; --ds-aqua-60:#009b99; --ds-aqua-70:#85bcba; --ds-aqua-80:#accece;
+  --ds-aqua-90:#cbe0df; --ds-aqua-95:#e7f0f0; --ds-aqua-99:#f2f7f7; --ds-aqua-100:#ffffff;
+
+  /* Yellow / Lime — "Core/Yellow", "Core/Lime" (acentos, sin uso semántico asignado aún) */
+  --ds-yellow-10:#261f00; --ds-yellow-20:#4d3d00; --ds-yellow-30:#806400; --ds-yellow-40:#b38a00;
+  --ds-yellow-50:#e6af00; --ds-yellow-60:#ffc400; --ds-yellow-70:#ffd233; --ds-yellow-80:#ffe066;
+  --ds-yellow-90:#ffee99; --ds-yellow-95:#fff7cc; --ds-yellow-99:#fffbe6;
+  --ds-lime-10:#1b230b; --ds-lime-20:#354616; --ds-lime-30:#526d21; --ds-lime-40:#6f932c;
+  --ds-lime-50:#8dba38; --ds-lime-60:#9bbb3f; --ds-lime-70:#b1cb57; --ds-lime-80:#c7dc7a;
+  --ds-lime-90:#ddedad; --ds-lime-95:#eef6d6; --ds-lime-99:#f7fbea;
+
+
+  /* ========== 2. TOKENS SEMÁNTICOS (MD3 Tokens/*) ========== */
+  /* Marca */
+  --ds-color-primary: var(--ds-sky-50);
+  --ds-color-primary-hover: var(--ds-sky-40);
+  --ds-color-primary-pressed: var(--ds-sky-30);
+  --ds-color-on-primary: #ffffff;
+
+  --ds-color-secondary: var(--ds-ocean-50);
+  --ds-color-on-secondary: #ffffff;
+  --ds-color-secondary-container: var(--ds-ocean-95);      /* = MD3 Tokens/secondary-container */
+  --ds-color-on-secondary-container: var(--ds-ocean-20);
+
+  /* Estado */
+  --ds-color-error: var(--ds-error-50);
+  --ds-color-on-error: #ffffff;
+  --ds-color-error-container: var(--ds-error-99);
+  --ds-color-on-error-container: var(--ds-error-30);
+
+  --ds-color-warning: var(--ds-warning-50);
+  --ds-color-warning-container: var(--ds-warning-99);       /* = MD3 Tokens/warning-container */
+  --ds-color-on-warning-container: var(--ds-warning-20);    /* = MD3 Tokens/on-warning-container */
+
+  --ds-color-success: var(--ds-success-50);
+  --ds-color-success-container: var(--ds-success-95);       /* = MD3 Tokens/success-container */
+  --ds-color-on-success-container: var(--ds-success-20);
+
+  --ds-color-tertiary: var(--ds-tertiary-40);
+  --ds-color-tertiary-container: var(--ds-tertiary-95);      /* = MD3 Tokens/tertiary-container */
+  --ds-color-on-tertiary-container: var(--ds-tertiary-20);   /* = MD3 Tokens/on-tertiary-container */
+
+  --ds-color-rose: var(--ds-rose-40);
+  --ds-color-rose-container: var(--ds-rose-95);              /* = MD3 Tokens/rose-container */
+  --ds-color-on-rose-container: var(--ds-rose-20);           /* = MD3 Tokens/on-rose-container */
+
+  --ds-color-aqua: var(--ds-aqua-40);
+  --ds-color-aqua-container: var(--ds-aqua-95);              /* = MD3 Tokens/aqua-container */
+  --ds-color-on-aqua-container: var(--ds-aqua-20);           /* = MD3 Tokens/on-aqua-container */
+
+  /* Superficies */
+  --ds-color-background: #f9f9fa;                            /* = MD3 Tokens/background */
+  --ds-color-surface: #ffffff;                                /* = MD3 Tokens/surface */
+  --ds-color-surface-container-lowest: #f1fafd;
+  --ds-color-surface-container-low: #e6f6fc;
+  --ds-color-surface-container: #d9f3ff;
+  --ds-color-surface-container-high: #bdeaff;
+  --ds-color-surface-container-highest: #a3e2ff;
+
+  /* Texto (roles verificados por contraste WCAG — ver nota al final) */
+  --ds-color-text-default: var(--ds-neutral-30);              /* = Text/color-text-default #232222 */
+  --ds-color-text-subtle: var(--ds-neutral-60);                /* #555353 — AA sobre blanco */
+  --ds-color-text-subtlest: var(--ds-neutral-70);              /* #6d6b6b */
+  --ds-color-text-disabled: var(--ds-neutral-80);              /* #929090 */
+  --ds-color-text-white: #ffffff;                              /* = Text/color-text-white */
+  /* Ajustado por contraste: Figma usa #007eb6 (sky-50), que da 4.28:1 sobre el fondo #f9f9fa (no cumple AA).
+     sky-40 #0072a4 = 5.06:1 sobre fondo, 5.33:1 sobre blanco. Ver Huecos del sistema A4. */
+  --ds-color-text-link: var(--ds-sky-40);
+  --ds-color-text-brand: var(--ds-ocean-40);                   /* #003b54 */
+  --ds-color-text-success: var(--ds-success-40);               /* #286c39 — más seguro que success-50 (4.71:1) */
+  --ds-color-text-warning-safe: var(--ds-warning-30);          /* #804f02, 6.91:1 — usar ESTE, no el de abajo */
+  --ds-color-text-warning-raw: var(--ds-warning-50);           /* = Text/color-text-warning #e38a05 — ¡falla WCAG AA, ≈2.66:1! No usar en texto. */
+  --ds-color-text-danger: var(--ds-error-40);                  /* #a60001, ≈8:1 */
+  --ds-color-text-violet: var(--ds-tertiary-40);               /* #7d6395 */
+
+  /* Bordes (= Border/color-border-n-variant*) */
+  --ds-color-border-subtle: var(--ds-neutral-variant-95);      /* #eaeaea */
+  --ds-color-border-default: var(--ds-neutral-variant-80);     /* #c7c7c9 */
+  /* Ajustado por contraste: Figma usa #bcbcbe (neutral-variant-70) = 1.90:1 sobre blanco; WCAG 1.4.11
+     exige 3:1 para el contorno de controles. neutral-variant-40 #919193 = 3.15:1. Ver Huecos A3. */
+  --ds-color-border-control: var(--ds-neutral-variant-40);
+  --ds-color-border-control-hover: var(--ds-neutral-variant-30); /* #67676a */
+  --ds-color-border-strong: var(--ds-neutral-variant-20);       /* #535354 */
+  --ds-color-border-focus: var(--ds-sky-50);                    /* #007eb6 */
+  --ds-color-border-danger: var(--ds-error-50);                 /* #d83a52 */
+  --ds-color-border-disabled: var(--ds-neutral-variant-80);     /* #c7c7c9 — pendiente confirmar tono propio */
+
+
+  /* ========== 3. TIPOGRAFÍA ========== */
+  /* Figma: "Typography" — una sola familia, Open Sans, 3 pesos: Regular/SemiBold/Bold */
+  --ds-font-family: "Open Sans", "Segoe UI", system-ui, sans-serif;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+
+  /* tamaño/interlineado por escala — fontsize/* + lineHeight reales de Figma */
+  --ds-display-lg-size: 48px; --ds-display-lg-lh: 54px;
+  --ds-display-md-size: 40px; --ds-display-md-lh: 47px;
+  --ds-display-sm-size: 36px; --ds-display-sm-lh: 44px; --ds-display-sm-ls: 0.8px;
+
+  --ds-headline-lg-size: 32px; --ds-headline-lg-lh: 40px;
+  --ds-headline-md-size: 28px; --ds-headline-md-lh: 36px;
+  --ds-headline-sm-size: 24px; --ds-headline-sm-lh: 32px;
+
+  --ds-title-lg-size: 22px; --ds-title-lg-lh: 28px;
+  --ds-title-md-size: 18px; --ds-title-md-lh: 24px;
+  --ds-title-sm-size: 14px; --ds-title-sm-lh: 20px;
+
+  --ds-label-lg-size: 14px; --ds-label-lg-lh: 20px;
+  --ds-label-md-size: 12px; --ds-label-md-lh: 16px;
+  --ds-label-sm-size: 11px; --ds-label-sm-lh: 16px;
+  --ds-label-xs-size: 10px; --ds-label-xs-lh: 16px;  /* Figma: fontsize/label/xs — solo SemiBold; lo usan los Status-Chips x-small */
+
+  --ds-body-lg-size: 16px; --ds-body-lg-lh: 24px;
+  --ds-body-md-size: 14px; --ds-body-md-lh: 20px;
+  --ds-body-sm-size: 12px; --ds-body-sm-lh: 16px;
+
+
+  /* ========== 4. ESPACIADO ========== */
+  /* Figma: "Spacing" — unidad base 8px, escala 0 a 80 */
+  --ds-space-0: 0px;   --ds-space-2: 2px;   --ds-space-4: 4px;   --ds-space-6: 6px;
+  --ds-space-8: 8px;   --ds-space-12: 12px; --ds-space-16: 16px; --ds-space-20: 20px;
+  --ds-space-24: 24px; --ds-space-32: 32px; --ds-space-40: 40px; --ds-space-48: 48px;
+  --ds-space-64: 64px; --ds-space-80: 80px;
+
+
+  /* ========== 5. RADIOS ========== */
+  /* Figma: "Round corners (radius)" */
+  --ds-radius-xs: 4px;    /* Checkbox, Banners, Snackbars, Inputs, Menu, Tooltip */
+  --ds-radius-s: 8px;     /* Chips, Table, Card, Dialog, Upload Card, Rich Tooltip */
+  --ds-radius-m: 16px;    /* Checkbox grande, Tooltips, Progress Bar, DatePicker */
+  --ds-radius-l: 80px;    /* Botones */
+  --ds-radius-full: 999px; /* Toggle / Switch, pills */
+
+
+  /* ========== 6. SOMBRAS ========== */
+  /* Figma: "Shadows o Elevation" — valores reales de DROP_SHADOW */
+  --ds-shadow-xs: 0 0 10px rgba(0,0,0,0.05);
+  --ds-shadow-s: 0 2px 6px 2px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.30);
+  --ds-shadow-m: 0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.30);
+  --ds-shadow-l: 0 6px 10px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.30);
+  --ds-shadow-xl: 0 8px 12px 6px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.30);
+
+  /* ========== 6b. ALERTAS (Banner y Snackbar) ========== */
+  /* Figma: Alert/{Info|Success|Warning|Danger}/{bg|borde|fg} e Icon/*. Todos salen de la paleta. */
+  --ds-alert-info-bg: var(--ds-ocean-95);       --ds-alert-info-border: var(--ds-ocean-50);   --ds-alert-info-fg: var(--ds-ocean-30);     --ds-alert-info-icon: var(--ds-sky-50);
+  --ds-alert-success-bg: var(--ds-success-95);  --ds-alert-success-border: var(--ds-success-50); --ds-alert-success-fg: var(--ds-success-20); --ds-alert-success-icon: var(--ds-success-50);
+  --ds-alert-warning-bg: var(--ds-warning-99);  --ds-alert-warning-border: var(--ds-warning-50); --ds-alert-warning-fg: var(--ds-warning-20); --ds-alert-warning-icon: var(--ds-warning-40);
+  --ds-alert-error-bg: var(--ds-error-99);      --ds-alert-error-border: var(--ds-error-50);  --ds-alert-error-fg: var(--ds-error-30);     --ds-alert-error-icon: var(--ds-error-40);
+  /* Snackbar high-contrast: fondo saturado y texto blanco (warning: fondo claro, texto oscuro) */
+  --ds-snackbar-default-bg: var(--ds-neutral-20);
+  --ds-snackbar-hc-success-bg: var(--ds-success-50);
+  --ds-snackbar-hc-warning-bg: var(--ds-warning-90);
+  --ds-snackbar-hc-error-bg: var(--ds-error-50);
+
+  /* ========== 6c. CHIPS ========== */
+  /* Figma: Chip/{color}/{bg|fg|border}. Rose: el fg de Figma (#ab6787) da 3.71:1 sobre su fondo → Rose 20 (5.19:1). */
+  --ds-chip-cyan-bg: var(--ds-sky-95);          --ds-chip-cyan-fg: var(--ds-sky-30);
+  --ds-chip-rose-bg: var(--ds-rose-95);         --ds-chip-rose-fg: var(--ds-rose-20);
+  --ds-chip-violet-bg: var(--ds-tertiary-95);   --ds-chip-violet-fg: var(--ds-tertiary-30);
+  --ds-chip-aqua-bg: var(--ds-aqua-95);         --ds-chip-aqua-fg: var(--ds-aqua-30);
+  --ds-chip-gray-bg: var(--ds-neutral-variant-95); --ds-chip-gray-fg: var(--ds-neutral-variant-30);
+  --ds-chip-red-bg: var(--ds-error-99);         --ds-chip-red-fg: var(--ds-error-30);
+  --ds-chip-yellow-bg: var(--ds-yellow-95);     --ds-chip-yellow-fg: var(--ds-yellow-30);
+  --ds-chip-orange-bg: var(--ds-warning-95);    --ds-chip-orange-fg: var(--ds-warning-30);
+  --ds-chip-lime-bg: var(--ds-lime-95);         --ds-chip-lime-fg: var(--ds-lime-30);
+  /* Status-Chips (con borde) */
+  --ds-chip-info-bg: var(--ds-ocean-95);        --ds-chip-info-fg: var(--ds-ocean-30);        --ds-chip-info-border: var(--ds-ocean-80);
+  --ds-chip-success-bg: var(--ds-success-95);   --ds-chip-success-fg: var(--ds-success-30);   --ds-chip-success-border: var(--ds-success-80);
+  --ds-chip-error-bg: var(--ds-error-99);       --ds-chip-error-fg: var(--ds-error-30);       --ds-chip-error-border: var(--ds-error-70);
+  --ds-chip-warning-bg: var(--ds-warning-95);   --ds-chip-warning-fg: var(--ds-warning-30);   --ds-chip-warning-border: var(--ds-warning-80);
+  --ds-chip-neutral-bg: var(--ds-neutral-variant-95); --ds-chip-neutral-fg: var(--ds-neutral-variant-30); --ds-chip-neutral-border: var(--ds-neutral-variant-80);
+
+
+  /* ========== 7. GRID ========== */
+  /* Figma: "Grids" — sistema de 8pt, 12 columnas desktop/tablet, 4 columnas mobile */
+  --ds-grid-container: 1152px;
+  --ds-grid-gutter: 24px;   /* 0.75rem */
+  --ds-grid-gap: 32px;
+  --ds-grid-cols-desktop: 12;
+  --ds-grid-cols-mobile: 4;
+  --ds-breakpoint-tablet: 1024px;
+  --ds-breakpoint-desktop: 1280px;
+}

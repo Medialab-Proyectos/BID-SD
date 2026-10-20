@@ -1,0 +1,151 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "cp-ds": {
+      "projectType": "library",
+      "root": "projects/cp-ds",
+      "sourceRoot": "projects/cp-ds/src",
+      "prefix": "ds",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/cp-ds/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/cp-ds/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/cp-ds/tsconfig.spec.json"
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular-vite:start-storybook",
+          "options": {
+            "configDir": "projects/cp-ds/.storybook",
+            "browserTarget": "cp-ds:build",
+            "port": 6006,
+            "styles": [
+              "projects/cp-ds/src/styles/cp-ds.scss"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular-vite:build-storybook",
+          "options": {
+            "configDir": "projects/cp-ds/.storybook",
+            "browserTarget": "cp-ds:build",
+            "outputDir": "storybook-static",
+            "styles": [
+              "projects/cp-ds/src/styles/cp-ds.scss"
+            ]
+          }
+        }
+      }
+    },
+    "matriz-riesgos-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/matriz-riesgos-app",
+      "sourceRoot": "projects/matriz-riesgos-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/matriz-riesgos-app/src/main.ts",
+            "tsConfig": "projects/matriz-riesgos-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/matriz-riesgos-app/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "dist/cp-ds/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "dist/cp-ds/styles/cp-ds.scss",
+              "projects/matriz-riesgos-app/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1500kB",
+                  "maximumError": "3MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "matriz-riesgos-app:build:production"
+            },
+            "development": {
+              "buildTarget": "matriz-riesgos-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  }
+}

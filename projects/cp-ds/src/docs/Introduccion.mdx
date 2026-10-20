@@ -1,0 +1,97 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introducción/Cómo usar este sistema" />
+
+# Sistema de Diseño Client Portal (BID)
+
+Librería de referencia para programación: **Angular 21 + Angular Material 21**, tematizada con los
+tokens del BID. Cada story muestra el componente real tal como se debe usar en la app.
+
+## Organización (Atomic Design)
+
+| Nivel | Qué contiene | Ejemplos |
+|---|---|---|
+| **Fundamentos** | Tokens: color, tipografía, espaciado, radios, sombras, grid, íconos | `--ds-color-primary`, `--ds-space-16` |
+| **Átomos** | Piezas mínimas, no se dividen | Button, Icon, Checkbox, Radio, Avatar, Badge |
+| **Moléculas** | Átomos combinados con un propósito | Input con label y ayuda, Breadcrumb, Paginator |
+| **Organismos** | Secciones completas de interfaz | TopNav, LeftNav, Footer, Stepper |
+| **Plantillas** | Organismos armados en una página | Pantalla Matriz de riesgos (TopNav + LeftNav + contenido) |
+
+## Regla principal: usar Angular Material directo
+
+Si Angular Material tiene el componente (button, checkbox, form-field, select, tabs, menu,
+paginator, stepper…), **se usa `mat-*` directo**. El tema del BID ya lo deja con el aspecto
+correcto; no hay que envolverlo en un componente propio.
+
+Solo existen componentes `ds-*` propios cuando Material no tiene equivalente (Avatar, Icon
+Container, File Uploader, TopNav, LeftNav, Footer, Loader de marca).
+
+## Instalación en una app Angular
+
+```json
+// angular.json → architect.build.options
+"styles": ["node_modules/@bid/cp-ds/styles/cp-ds.scss"],
+"assets": [{ "glob": "**/*", "input": "node_modules/@bid/cp-ds/assets", "output": "assets" }]
+```
+
+El segundo bloque copia los logos del BID (`assets/logos/*.svg`) que usan TopNav y Footer.
+
+```html
+<!-- index.html: fuentes. Material Symbols con RANGOS de ejes, no valores fijos:
+     con valores fijos el eje FILL queda congelado y los íconos rellenos no funcionan. -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
+```
+
+```ts
+// app.config.ts
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideCpDs } from '@bid/cp-ds';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideCpDs(), provideNativeDateAdapter()],
+};
+```
+
+`provideCpDs()` configura, en un solo lugar:
+
+- `<mat-icon>` con Material Symbols Outlined.
+- Textos de Paginator y Stepper en español.
+- Fechas en español (`MAT_DATE_LOCALE` = `'es'`; otro locale con `provideCpDs({ dateLocale: 'es-AR' })`).
+- Pestañas que ocupan el ancho de su texto (Material las estira por defecto).
+
+## Modo oscuro = contexto inverse
+
+En el BID el modo oscuro es el contexto **inverse**: componentes sobre la superficie de marca
+(`#004e70`). Se activa con una clase, y todos los componentes de Material que estén adentro
+pasan a su variante inverse:
+
+```html
+<header class="ds-inverse">…</header>
+```
+
+El tema no sigue al modo oscuro del sistema operativo: el sistema del BID no lo define así.
+
+## Tokens y paleta
+
+- **Todo color sale de la paleta de Visual Styles.** `npm run lint:paleta` falla si aparece un color
+  que no está en la paleta.
+- Todo valor visual se usa por token `--ds-*` (ver **Fundamentos**), nunca como hexadecimal suelto.
+- El tema conecta cada token de Material (`--mat-sys-*`) con un token del BID, así que cambiar un
+  `--ds-*` en `_tokens.scss` cambia todos los componentes.
+- **No redefinir un `--ds-*` dentro de un contenedor** para cambiar un componente de Material: los
+  tokens de Material se calculan en `html` y no se enteran. Para el modo oscuro usar `.ds-inverse`.
+
+## Accesibilidad
+
+Objetivo **WCAG 2.1 AA**. Donde un color de Figma no cumplía contraste se reemplazó por otro tono de
+la misma paleta que sí cumple (ej. texto azul: Blue Sky 40 #0072a4 en vez de 50). El registro interno
+de estos cambios (valor original y contraste calculado) vive en `HUECOS-DEL-SISTEMA.md`, en la raíz
+del repositorio.
+
+## Estado de la verificación
+
+Los fundamentos y componentes vienen de la librería CSS verificada contra los archivos de Figma
+anteriores. **Falta reconciliar con los archivos nuevos** (CP — Visual Styles, CP — UI
+Components, IDB-DS Icons): están pendientes de acceso. Lo que todavía no está confirmado se
+marca como *pendiente* en cada página.

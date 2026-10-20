@@ -1,0 +1,93 @@
+// Tema de Angular Material 21 (M3) conectado a los tokens del BID.
+// Cada token de sistema de Material (--mat-sys-*) apunta a un token --ds-* con var(),
+// así los tokens son la única fuente de verdad: cambiar --ds-* cambia todos los componentes.
+@use '@angular/material' as mat;
+
+@mixin apply() {
+  // theme-type: light — en el BID el modo oscuro es el contexto "inverse" (componentes
+  // sobre superficie de marca), no un tema que siga al sistema operativo. Con el valor
+  // por defecto (color-scheme) Material cambiaría de colores solo. Ver mixin inverse().
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$violet-palette,
+      theme-type: light,
+    ),
+    typography: (
+      plain-family: (Open Sans, sans-serif),
+      brand-family: (Open Sans, sans-serif),
+      bold-weight: 700,
+      medium-weight: 600,
+      regular-weight: 400,
+    ),
+    density: 0,
+  ));
+
+  @include mat.theme-overrides((
+    primary: var(--ds-color-primary),
+    on-primary: var(--ds-color-on-primary),
+    primary-container: var(--ds-sky-95),
+    on-primary-container: var(--ds-sky-10),
+    inverse-primary: var(--ds-sky-80),
+
+    secondary: var(--ds-color-secondary),
+    on-secondary: var(--ds-color-on-secondary),
+    secondary-container: var(--ds-color-secondary-container),
+    on-secondary-container: var(--ds-color-on-secondary-container),
+
+    tertiary: var(--ds-color-tertiary),
+    on-tertiary: #ffffff,
+    tertiary-container: var(--ds-color-tertiary-container),
+    on-tertiary-container: var(--ds-color-on-tertiary-container),
+
+    error: var(--ds-color-error),
+    on-error: var(--ds-color-on-error),
+    error-container: var(--ds-color-error-container),
+    on-error-container: var(--ds-color-on-error-container),
+
+    background: var(--ds-color-background),
+    on-background: var(--ds-color-text-default),
+    surface: var(--ds-color-surface),
+    on-surface: var(--ds-color-text-default),
+    surface-variant: var(--ds-neutral-99),
+    on-surface-variant: var(--ds-color-text-subtle),
+    // Único inverse-surface visto en Figma: "md3-tokens/inverse-surface-darkblue" #004e70.
+    // Pendiente: confirmar si tooltip/snackbar usan otro inverse-surface neutro.
+    inverse-surface: var(--ds-color-secondary),
+    inverse-on-surface: #ffffff,
+
+    // Hueco documentado: los tokens --ds-color-surface-container* del BID son tintes
+    // azules, pero menús, selects y diálogos en Figma son blancos. Material usa estos
+    // roles justamente para esos paneles, así que se mapean a neutros.
+    surface-container-lowest: #ffffff,
+    surface-container-low: #ffffff,
+    surface-container: #ffffff,
+    surface-container-high: #ffffff,
+    surface-container-highest: var(--ds-neutral-variant-95),
+
+    outline: var(--ds-color-border-control),
+    outline-variant: var(--ds-color-border-default),
+
+    corner-extra-small: var(--ds-radius-xs),
+    corner-small: var(--ds-radius-s),
+    corner-medium: var(--ds-radius-m),
+    corner-large: var(--ds-radius-m),
+    corner-full: var(--ds-radius-full),
+  ));
+}
+
+// Modo oscuro del BID = contexto "inverse": todo componente de Material dentro de un
+// contenedor con este mixin pasa a su variante inverse. Solo valores verificados en Figma
+// (Button/IconButton/TopNav/Footer inverse, Icon "Knock-out" e "Inverse Disabled").
+@mixin inverse() {
+  @include mat.theme-overrides((
+    surface: var(--ds-color-secondary),       // #004e70, superficie de marca
+    background: var(--ds-color-secondary),
+    on-surface: #ffffff,                       // texto e íconos "Knock-out"
+    on-surface-variant: #ffffff,
+    primary: #ffffff,                          // botón primario inverse: fondo blanco…
+    on-primary: var(--ds-color-secondary),     // …con texto #004e70
+    outline: rgba(255, 255, 255, 0.5),         // borde del botón secundario inverse
+  ));
+  // Deshabilitado: Material usa on-surface al 38% = "Inverse Disabled" (#fff, 38%).
+}

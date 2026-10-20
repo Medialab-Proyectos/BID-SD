@@ -1,0 +1,34 @@
+// Punto de entrada del Sistema de Diseño CP (BID).
+// En la app consumidora: "styles": ["node_modules/@bid/cp-ds/styles/cp-ds.scss"] en angular.json.
+@use '@angular/cdk';
+@use 'tokens';
+@use 'typography';
+@use 'utilities';
+@use 'ds-components';
+@use 'material-theme' as theme;
+@use 'material-components' as components;
+
+html {
+  @include theme.apply();
+  @include components.apply();
+}
+
+@include components.states();
+
+// .cdk-visually-hidden: texto solo para lectores de pantalla (ej. "abre en una pestaña nueva").
+@include cdk.a11y-visually-hidden();
+
+body {
+  margin: 0;
+  font-family: var(--ds-font-family);
+  color: var(--ds-color-text-default);
+  background: var(--ds-color-background);
+}
+
+// Modo oscuro del BID (contexto inverse). Uso: <header class="ds-inverse">…</header>
+.ds-inverse {
+  @include theme.inverse();
+  @include components.inverse();
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}

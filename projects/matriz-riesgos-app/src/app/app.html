@@ -1,0 +1,116 @@
+<div class="pagina">
+  <ds-topnav productName="Portal de Clientes" logoLang="eng" [links]="enlaces" workspace="Procesos Financieros">
+    <ng-container dsTopnavActions>
+      <button matIconButton aria-label="Notificaciones, 1 nueva"><mat-icon matBadge="1">notifications</mat-icon></button>
+      <button matIconButton aria-label="Soporte"><mat-icon>headset_mic</mat-icon></button>
+      <ds-avatar name="Federico Ruiz" initials="FR" />
+    </ng-container>
+  </ds-topnav>
+
+  <div class="volver">
+    <button matButton="outlined"><mat-icon>arrow_back</mat-icon>Volver a tareas</button>
+  </div>
+
+  <!-- Franja con los datos de la operación. No hay componente de esta variante de TopNav (Type=Simple, Blue):
+       se arma con la superficie de marca (.ds-inverse) y la tipografía del sistema. -->
+  <section class="operacion ds-inverse" aria-label="Datos de la operación">
+    <div class="operacion__titulo">
+      <ds-icon-container icon="source_environment" size="md" />
+      <div>
+        <p class="ds-text ds-text--body-sm">Operación 3881/OC-PE</p>
+        <p class="ds-text ds-text--body-lg">Periodo julio a diciembre del 2026</p>
+      </div>
+    </div>
+    <div class="operacion__meta">
+      <p class="ds-text ds-text--body-lg">Última modificación del informe: 22 Dic 2023, 04:00 PM UTC</p>
+      <p class="ds-text ds-text--body-lg">Responsable: Javier Gómez - Jefe de equipo UE</p>
+    </div>
+  </section>
+
+  <div class="cuerpo">
+    <ds-leftnav productName="Contenido">
+      <div class="pasos">
+        <ds-step-list [steps]="pasos" [selected]="pasoActual()" content="icon" [numbered]="true" ariaLabel="Pasos del informe"
+                      (stepClick)="pasoActual.set($event)" />
+      </div>
+    </ds-leftnav>
+
+    <main class="contenido">
+      <h1 class="ds-text ds-text--title-md-bold proyecto">Innovación en infraestructura escolar</h1>
+
+      <div class="seccion">
+        <h2 class="ds-text ds-text--title-md-bold">3. Matriz de riesgos</h2>
+        <p class="ds-text ds-text--body-lg texto">
+          A continuación se debe revisar los riesgos activos de la operación. Es obligatorio visualizar todos los riesgos activos,
+          sus detalles y acciones de respuesta. Es posible editar los riesgos existentes y actualizar sus detalles y acciones de
+          respuesta, según corresponda.
+        </p>
+        <p class="ds-text ds-text--body-lg texto">
+          En la subsección/pestaña nuevos riesgos identificados, se puede informar nuevos riesgos identificados para revisión por
+          parte del BID.
+        </p>
+
+        <ds-banner color="info" [multiline]="true">
+          <strong>Recordatorio:</strong>
+          <ul class="recordatorio">
+            <li>Debe haber al menos un riesgo activo para cada operación. Si su operación no tiene un riesgo activo, es mandatorio identificar un nuevo riesgo en la subsección nuevos riesgos identificados.</li>
+            <li>Nuevos riesgos identificados deben seguir la siguiente estructura: si existe una CAUSA, puede ocurrir un EVENTO que cause un IMPACTO.</li>
+            <li>Riesgos editados y/o identificados están sujetos al análisis y validación por parte del BID.</li>
+            <li>Los riesgos se presentan ordenados por nivel de riesgo, mostrando primero los de mayor nivel.</li>
+          </ul>
+        </ds-banner>
+
+        <mat-card appearance="outlined">
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab>
+              <ng-template mat-tab-label><ds-status-icon status="incomplete" size="sm" />&nbsp;Riesgos activos <span class="obligatorio" aria-label="obligatorio">*</span></ng-template>
+
+              <div class="ds-table-container ds-table--lc tabla">
+                <table mat-table [dataSource]="riesgos" aria-label="Riesgos activos">
+                  <ng-container matColumnDef="seleccion">
+                    <th mat-header-cell *matHeaderCellDef style="width:64px"><span class="cdk-visually-hidden">Estado</span></th>
+                    <td mat-cell *matCellDef="let r"><ds-status-icon status="active" size="sm" /></td>
+                  </ng-container>
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef style="width:56px">ID</th>
+                    <td mat-cell *matCellDef="let r">{{ r.id }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                    <td mat-cell *matCellDef="let r" class="descripcion">{{ r.descripcion }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="nivel">
+                    <th mat-header-cell *matHeaderCellDef style="width:140px">Nivel del riesgo</th>
+                    <td mat-cell *matCellDef="let r">
+                      <mat-chip class="ds-chip ds-chip--sm" [class.ds-chip--red]="r.nivel === 'Alto'" [class.ds-chip--yellow]="r.nivel !== 'Alto'">{{ r.nivel }}</mat-chip>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="taxonomia">
+                    <th mat-header-cell *matHeaderCellDef style="width:240px">Taxonomía</th>
+                    <td mat-cell *matCellDef="let r">{{ r.taxonomia }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="accion">
+                    <th mat-header-cell *matHeaderCellDef style="width:80px">Acción</th>
+                    <td mat-cell *matCellDef="let r">
+                      <button matIconButton [attr.aria-label]="'Ver el riesgo ' + r.id"><mat-icon>visibility</mat-icon></button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+                </table>
+              </div>
+            </mat-tab>
+            <mat-tab label="Nuevos riesgos identificados"></mat-tab>
+          </mat-tab-group>
+        </mat-card>
+
+        <p class="ds-text ds-text--body-md pie-tabla">Sub-secciones y campos obligatorios<span class="obligatorio" aria-hidden="true">*</span></p>
+      </div>
+    </main>
+  </div>
+
+  <footer class="ds-drawer__footer navegacion">
+    <button matButton="outlined"><mat-icon>arrow_back</mat-icon>Anterior</button>
+    <button matButton="filled">Siguiente<mat-icon iconPositionEnd>arrow_forward</mat-icon></button>
+  </footer>
+</div>
