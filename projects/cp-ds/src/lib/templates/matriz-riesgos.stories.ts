@@ -138,17 +138,18 @@ interface Riesgo {
 
         <p class="ds-text ds-text--body-md pie-tabla">Sub-secciones y campos obligatorios<span class="obligatorio" aria-hidden="true">*</span></p>
       </div>
+
+      <footer class="ds-drawer__footer navegacion">
+        <button matButton="outlined"><mat-icon>arrow_back</mat-icon>Anterior</button>
+        <button matButton="outlined">Siguiente<mat-icon iconPositionEnd>arrow_forward</mat-icon></button>
+      </footer>
     </main>
   </div>
 
-  <footer class="ds-drawer__footer navegacion">
-    <button matButton="outlined"><mat-icon>arrow_back</mat-icon>Anterior</button>
-    <button matButton="filled">Siguiente<mat-icon iconPositionEnd>arrow_forward</mat-icon></button>
-  </footer>
 </div>
 `,
   styles: [`
-.pagina { display: grid; grid-template-rows: auto auto auto 1fr auto; min-height: 100vh; background: var(--ds-color-background); }
+.pagina { display: grid; grid-template-rows: auto auto auto 1fr; min-height: 100vh; background: var(--ds-color-background); }
 .volver { padding: var(--ds-space-16); }
 .operacion { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-24); box-sizing: border-box; height: 72px;
   margin: 0 var(--ds-space-16) var(--ds-space-16); padding: var(--ds-space-16); background: var(--ds-color-secondary); color: var(--ds-color-text-white); }
@@ -157,7 +158,7 @@ interface Riesgo {
 .operacion__meta { text-align: end; padding: 10px var(--ds-space-16); }
 .cuerpo { display: grid; grid-template-columns: 256px 1fr; gap: 0; padding: 0 var(--ds-space-16) var(--ds-space-16); min-height: 0; }
 .pasos { padding: var(--ds-space-24) var(--ds-space-12); }
-.contenido { min-width: 0; }
+.contenido { min-width: 0; display: flex; flex-direction: column; }
 .proyecto { margin: 0; box-sizing: border-box; height: 72px; display: flex; align-items: center; padding: var(--ds-space-16); background: var(--ds-color-surface); border-bottom: 1px solid var(--ds-neutral-99); }
 .seccion { display: flex; flex-direction: column; gap: var(--ds-space-16); padding: var(--ds-space-24) var(--ds-space-24) var(--ds-space-16) var(--ds-space-40); }
 .seccion h2 { margin: 0; }
@@ -167,7 +168,7 @@ interface Riesgo {
 .descripcion { padding-block: var(--ds-space-12); }
 .obligatorio { color: var(--ds-color-text-danger); }
 .pie-tabla { margin: 0; color: var(--ds-color-text-default); }
-.navegacion { justify-content: space-between; background: var(--ds-color-surface); }
+.navegacion { justify-content: space-between; margin-top: auto; background: var(--ds-color-surface); }
 `],
 })
 class PantallaMatrizRiesgos {

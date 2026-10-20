@@ -1,7 +1,7 @@
 // Solo layout de la pantalla. Todo el aspecto de los componentes (colores, tipografía, radios) viene de @bid/cp-ds.
 .pagina {
   display: grid;
-  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-rows: auto auto auto 1fr;
   min-height: 100vh;
   background: var(--ds-color-background);
 }
@@ -35,7 +35,7 @@
 
 .pasos { padding: var(--ds-space-24) var(--ds-space-12); }
 
-.contenido { min-width: 0; }
+.contenido { min-width: 0; display: flex; flex-direction: column; }
 
 .proyecto {
   margin: 0;
@@ -72,5 +72,6 @@
 
 .navegacion {
   justify-content: space-between;
-  background: var(--ds-color-surface);
+  margin-top: auto; // Figma: el pie va al fondo de la columna de contenido, junto al LeftNav
+  background: var(--ds-color-surface); // Figma: el pie tiene fondo blanco
 }
