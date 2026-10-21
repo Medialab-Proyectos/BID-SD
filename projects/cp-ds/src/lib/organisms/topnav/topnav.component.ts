@@ -45,7 +45,7 @@ export interface DsNavLink {
       <div class="ds-topnav__search"><ng-content select="[dsTopnavSearch]" /></div>
       <div class="ds-topnav__actions">
         @if (languages().length) {
-          <button matButton class="ds-topnav__small" [matMenuTriggerFor]="langMenu" [attr.aria-label]="'Idioma: ' + language()">
+          <button matButton [matMenuTriggerFor]="langMenu" [attr.aria-label]="'Idioma: ' + language()">
             {{ language() }}<mat-icon iconPositionEnd>expand_more</mat-icon>
           </button>
           <mat-menu #langMenu="matMenu">
@@ -56,7 +56,7 @@ export interface DsNavLink {
         }
         @if (workspace()) {
           @if (workspaces().length > 1) {
-            <button matButton="filled" class="ds-topnav__small ds-topnav__workspace" [matMenuTriggerFor]="wsMenu"
+            <button matButton="filled" class="ds-topnav__workspace" [matMenuTriggerFor]="wsMenu"
                     [attr.aria-label]="'Espacio de trabajo: ' + workspace()">
               {{ workspace() }}<mat-icon iconPositionEnd>expand_more</mat-icon>
             </button>
@@ -66,7 +66,7 @@ export interface DsNavLink {
               }
             </mat-menu>
           } @else {
-            <button matButton="filled" class="ds-topnav__small ds-topnav__workspace" type="button">{{ workspace() }}</button>
+            <button matButton="filled" class="ds-topnav__workspace" type="button">{{ workspace() }}</button>
           }
         }
         <ng-content select="[dsTopnavActions]" />

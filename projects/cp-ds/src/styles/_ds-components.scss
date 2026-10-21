@@ -694,15 +694,6 @@ button.ds-step{ cursor:pointer }
 .ds-mini-card__meta{ display:inline-flex; align-items:center; gap:var(--ds-space-4) }
 .ds-mini-card__meta .ds-icon{ font-size:16px; color:var(--ds-neutral-variant-20) }
 
-/* TopNav — zona derecha (Figma `other elements`, nodo 7157:6234): idioma y workspace son botones de 40px con
-   etiqueta Body Small Bold 12/16 y un ícono de 16px; el buscador global mide 190px. */
-.ds-topnav__small{
-  --mat-button-filled-label-text-size:12px; --mat-button-text-label-text-size:12px;
-  --mat-button-filled-label-text-line-height:16px; --mat-button-text-label-text-line-height:16px;
-  /* Figma: botón chico = 32px de alto (8 + 16 + 8) y 16px de padding lateral, no los 40px / 24px del botón normal */
-  --mat-button-filled-container-height:32px; --mat-button-text-container-height:32px;
-  --mat-button-filled-horizontal-padding:16px; --mat-button-text-horizontal-padding:16px;
-}
-.ds-topnav__small .mat-icon{ font-size:16px; width:16px; height:16px }
+/* TopNav — zona derecha: idioma y workspace son botones large (40px, tamaño estándar de Material); el buscador global mide 190px. */
 .ds-topnav__search{ width:190px; flex-shrink:0 }
 .ds-topnav__search:not(:has(*)){ display:none }
