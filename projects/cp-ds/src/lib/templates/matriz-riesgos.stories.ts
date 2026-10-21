@@ -71,7 +71,7 @@ interface Riesgo {
       <h1 class="ds-text ds-text--title-md-bold proyecto">Innovación en infraestructura escolar</h1>
 
       <div class="seccion">
-        <h2 class="ds-text ds-text--title-md-bold">3. Matriz de riesgos</h2>
+        <h2 class="ds-text ds-text--title-md-bold">4. Matriz de riesgos</h2>
         <p class="ds-text ds-text--body-lg texto">
           A continuación se debe revisar los riesgos activos de la operación. Es obligatorio visualizar todos los riesgos activos,
           sus detalles y acciones de respuesta. Es posible editar los riesgos existentes y actualizar sus detalles y acciones de
