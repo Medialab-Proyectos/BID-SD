@@ -13,6 +13,7 @@ cuando Material no tiene equivalente (Banner, Snackbar, Avatar, TopNav, LeftNav,
 | `projects/cp-ds/` | La librería: componentes `ds-*`, tema de Material, tokens y estilos. Se empaqueta con ng-packagr como `@bid/cp-ds`. |
 | `projects/cp-ds/.storybook/` | Configuración de Storybook. |
 | `projects/matriz-riesgos-app/` | App de ejemplo (pantalla "Matriz de riesgos") que consume la librería empaquetada, como lo haría un proyecto real. |
+| `projects/enmiendas-app/` | Segunda app de ejemplo (pantalla "Enmiendas": registro de enmienda de monto), también armada solo con la librería. |
 | `scripts/` | Verificaciones: `lint:paleta` (todo color sale de la paleta) y `lint:tokens` (todo `--ds-*` usado está definido). |
 | `HUECOS-DEL-SISTEMA.md` | Registro interno de huecos, inconsistencias y decisiones frente a Figma. |
 
@@ -24,6 +25,7 @@ npm run storybook         # Storybook en http://localhost:6006
 npm run build-storybook   # sitio estático en storybook-static/
 npm run build:lib         # empaquetar la librería en dist/cp-ds
 npm run matriz-riesgos    # compilar la librería y levantar la app de ejemplo en http://localhost:4200
+npm run enmiendas         # compilar la librería y levantar la app Enmiendas en http://localhost:4201
 npm run lint:estilos      # paleta + tokens
 ```
 

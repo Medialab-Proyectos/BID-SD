@@ -183,3 +183,16 @@ Se construyeron, con especificaciones leídas de Figma (nodos indicados en cada 
 | G8 | Tamaños small y x-small de chips | Solo se leyó el medium (padding 12×6). | Small 24px y x-small 20px, con padding inferido del ancho de los símbolos. | Diseño confirma. |
 | G9 | Tooltip sin sombra | Figma no define sombra para `Plain Tooltip`; el `Popover` sí (Shadow-medium). | Tooltip sin sombra. | — |
 | G10 | Rate limit de Figma | La cuenta conectada (plan Education) corta las consultas masivas al MCP. | Las specs se extrajeron con pausas; algunas variantes quedaron sin leer (Dots-Menu, DrawerCard medium/large, Input-Search Medium con estados). | Repetir con una cuenta Dev/Full si se necesita más detalle. |
+
+## Pantalla Enmiendas (Figma nodo 12512:37408)
+
+| # | Hueco | Evidencia | Decisión aplicada | Pendiente |
+|---|---|---|---|---|
+| E1 | Botón "Return to Client Portal": dos tamaños en el mismo Figma | La variante con LeftNav compacto lo pinta con texto de 16px y la expandida con 12px (Body Small Bold). | Botón large estándar (16px, 40px de alto), igual que el de workspace. | Diseño confirma cuál es el correcto. |
+| E2 | Stepper horizontal: los cinco pasos con círculo azul | Figma usa la variante Active en todos los pasos, no solo en el actual. | Los cinco pasos con estado `active` y solo el primero seleccionado. Un lector de pantalla anuncia "actual" en todos. | Diseño define el estado de los pasos aún no visitados. |
+| E3 | Tabla de componentes y productos | Es `Table (Detach me!)`: filas anidadas con campos editables, no es una tabla de Material. | Tabla HTML con estilos de la pantalla; los campos son `mat-form-field` small. | Evaluar un componente de tabla anidada. |
+| E4 | Select con chevron | Figma dibuja un chevron (keyboard_arrow_down); `mat-select` trae el triángulo de Material. | Se deja el triángulo de Material. | Decidir si se reemplaza el ícono del select en el tema. |
+| E5 | Checkbox Small | Figma usa Checkbox size Small (20px, sin área táctil de 40px). | Checkbox estándar de Material. | Agregar variante small al tema. |
+| E6 | Campo deshabilitado más oscuro | Figma pinta el fondo con Button/flat/disabled (rgba 10,10,10,.12); el tema usa Neutral 99. | Se mantiene Neutral 99 (más claro). | Diseño confirma el tono. |
+| E7 | LeftNav: ícono final `.right-action` | "Financial management" lleva un chevron al final. | Nuevo input `trailingIcon` en `ds-link-item`. | — |
+| E8 | Fecha en formato inglés | Figma muestra 08/17/2023. | `provideCpDs({ dateLocale: 'en-US' })` y formato con ceros en esta pantalla. | — |
