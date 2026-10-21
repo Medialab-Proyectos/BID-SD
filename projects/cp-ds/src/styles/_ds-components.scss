@@ -699,6 +699,9 @@ button.ds-step{ cursor:pointer }
 .ds-topnav__small{
   --mat-button-filled-label-text-size:12px; --mat-button-text-label-text-size:12px;
   --mat-button-filled-label-text-line-height:16px; --mat-button-text-label-text-line-height:16px;
+  /* Figma: botón chico = 32px de alto (8 + 16 + 8) y 16px de padding lateral, no los 40px / 24px del botón normal */
+  --mat-button-filled-container-height:32px; --mat-button-text-container-height:32px;
+  --mat-button-filled-horizontal-padding:16px; --mat-button-text-horizontal-padding:16px;
 }
 .ds-topnav__small .mat-icon{ font-size:16px; width:16px; height:16px }
 .ds-topnav__search{ width:190px; flex-shrink:0 }

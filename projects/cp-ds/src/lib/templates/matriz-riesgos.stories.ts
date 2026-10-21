@@ -60,7 +60,7 @@ interface Riesgo {
   </section>
 
   <div class="cuerpo">
-    <ds-leftnav productName="Contenido">
+    <ds-leftnav productName="Contenido" [collapsible]="false">
       <div class="pasos">
         <ds-step-list [steps]="pasos" [selected]="pasoActual()" content="icon" [numbered]="true" ariaLabel="Pasos del informe"
                       (stepClick)="pasoActual.set($event)" />

@@ -21,10 +21,12 @@ export interface DsLeftnavUser {
   template: `
     <aside class="ds-leftnav" [class.ds-leftnav--slim]="slim()" style="height:100%">
       <div class="ds-leftnav__header">
-        <button type="button" class="ds-iconbtn ds-iconbtn--sm" (click)="toggle.emit()"
-                [attr.aria-label]="slim() ? 'Expandir menú' : 'Colapsar menú'" [attr.aria-expanded]="!slim()">
-          <span class="ds-icon" aria-hidden="true">{{ slim() ? 'arrow_forward' : 'arrow_back' }}</span>
-        </button>
+        @if (collapsible()) {
+          <button type="button" class="ds-iconbtn ds-iconbtn--sm" (click)="toggle.emit()"
+                  [attr.aria-label]="slim() ? 'Expandir menú' : 'Colapsar menú'" [attr.aria-expanded]="!slim()">
+            <span class="ds-icon" aria-hidden="true">{{ slim() ? 'arrow_forward' : 'arrow_back' }}</span>
+          </button>
+        }
         @if (!slim()) { <span>{{ productName() }}</span> }
       </div>
 
@@ -57,6 +59,8 @@ export interface DsLeftnavUser {
 export class DsLeftnav {
   readonly productName = input('');
   readonly slim = input(false);
+  /** Muestra el botón de flecha del encabezado que colapsa/expande el menú (Figma: `icon left` de `.Nav-sidebar-header`). */
+  readonly collapsible = input(true);
   readonly user = input<DsLeftnavUser | null>(null);
   readonly version = input('');
   /** true si se proyecta un selector de idioma con el atributo dsLeftnavLanguage. */
