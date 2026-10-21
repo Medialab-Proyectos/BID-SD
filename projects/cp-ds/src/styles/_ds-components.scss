@@ -514,7 +514,7 @@ button.ds-step{ cursor:pointer }
 .ds-stepper--h .ds-step{ width:auto; flex-shrink:0 }
 .ds-step__dot{
   display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
-  width:20px; height:20px; border-radius:50%; background:var(--ds-neutral-variant-30); /* [AA] Figma: #a6a6a8 da 2.43:1 con el número blanco → Neutral variant 30 #67676a (5.64:1) */
+  width:20px; height:20px; margin:2px; /* Figma: círculo de 20px centrado en un espacio de 24px (.Step-enable, padding 2) */ border-radius:50%; background:var(--ds-neutral-variant-30); /* [AA] Figma: #a6a6a8 da 2.43:1 con el número blanco → Neutral variant 30 #67676a (5.64:1) */
   color:#ffffff; font-family:var(--ds-font-family); font-weight:var(--ds-font-weight-bold); font-size:12px; line-height:16px;
 }
 .ds-step--active .ds-step__dot, .ds-step--completed .ds-step__dot{ background:var(--ds-color-primary) } /* = surface/primary #007eb6, confirmado: Active y Completed se ven IGUAL en este átomo */
@@ -534,7 +534,7 @@ button.ds-step{ cursor:pointer }
 .ds-step--selected, .ds-step--selected:hover{ background:var(--ds-sky-95) } /* = interaction/selected #d9f4ff */
 
 /* conectores */
-.ds-stepper__connector{ width:24px; height:16px; display:flex; justify-content:center; flex-shrink:0 } /* vertical, entre pasos */
+.ds-stepper__connector{ width:40px; height:16px; display:flex; justify-content:center; flex-shrink:0 } /* vertical, entre pasos. Figma (mask): 40px = icono 24 + padding del paso 2×8, para que la línea quede bajo el centro del círculo */
 .ds-stepper__connector::after{ content:''; width:1px; background:var(--ds-neutral-variant-50) }
 .ds-stepper__connector--h{ flex:1; height:1px; min-width:24px; background:var(--ds-neutral-variant-50) } /* horizontal, entre pasos */
 
