@@ -44,8 +44,8 @@ interface Riesgo {
   </div>
 
   <!-- Franja con los datos de la operación. No hay componente de esta variante de TopNav (Type=Simple, Blue):
-       se arma con la superficie de marca (.ds-inverse) y la tipografía del sistema. -->
-  <section class="operacion ds-inverse" aria-label="Datos de la operación">
+       se arma con la superficie blanca y la tipografía del sistema. -->
+  <section class="operacion" aria-label="Datos de la operación">
     <div class="operacion__titulo">
       <ds-icon-container icon="source_environment" size="md" />
       <div>
@@ -152,7 +152,7 @@ interface Riesgo {
 .pagina { display: grid; grid-template-rows: auto auto auto 1fr; min-height: 100vh; background: var(--ds-color-background); }
 .volver { padding: var(--ds-space-16); }
 .operacion { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-24); box-sizing: border-box; height: 72px;
-  margin: 0 var(--ds-space-16) var(--ds-space-16); padding: var(--ds-space-16); background: var(--ds-color-secondary); color: var(--ds-color-text-white); }
+  margin: 0 var(--ds-space-16) var(--ds-space-16); padding: var(--ds-space-16); background: var(--ds-color-surface); color: var(--ds-color-text-default); }
 .operacion p { margin: 0; color: inherit; }
 .operacion__titulo { display: flex; align-items: center; gap: var(--ds-space-16); }
 .operacion__meta { text-align: end; padding: 10px var(--ds-space-16); }

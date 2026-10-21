@@ -14,11 +14,11 @@
   justify-content: space-between;
   gap: var(--ds-space-24);
   box-sizing: border-box;
-  height: 72px; // Figma: TopNav-header Simple/Blue — 72px, sin radio
+  height: 72px; // Figma: TopNav-header Simple/White — 72px, sin radio
   margin: 0 var(--ds-space-16) var(--ds-space-16);
   padding: var(--ds-space-16);
-  background: var(--ds-color-secondary);
-  color: var(--ds-color-text-white);
+  background: var(--ds-color-surface);
+  color: var(--ds-color-text-default);
 
   p { margin: 0; color: inherit; }
   &__titulo { display: flex; align-items: center; gap: var(--ds-space-16); }
