@@ -399,6 +399,9 @@
     text-weight: var(--ds-font-weight-semibold),
     container-size: 20px,
   ));
+  // Material ubica el número por altura de línea (16px dentro de un círculo de 20px) y queda 2.5px más arriba que el centro;
+  // Figma lo centra con auto-layout.
+  .mat-badge .mat-badge-content { display: flex; align-items: center; justify-content: center; }
 
   // ---------- Stepper (mat-stepper) ----------
   // Spec "Step": círculo con número; activo/completado = azul; pendiente = Neutral variant 30
