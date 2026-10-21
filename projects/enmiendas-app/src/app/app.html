@@ -1,0 +1,233 @@
+<div class="pagina">
+  <ds-topnav productName="Fiduciary Processes" logoLang="eng" [links]="enlaces">
+    <ng-container dsTopnavActions>
+      <button matButton="outlined">Return to Client Portal</button>
+      <button matIconButton aria-label="Notificaciones, 1 nueva"><mat-icon matBadge="1">notifications</mat-icon></button>
+      <button matIconButton aria-label="Soporte"><mat-icon>headset_mic</mat-icon></button>
+      <ds-avatar name="Federico Ruiz" initials="FR" />
+    </ng-container>
+  </ds-topnav>
+
+  <div class="cuerpo">
+    <ds-leftnav productName="Close" [slim]="slim()" (toggle)="slim.set(!slim())">
+      <div class="menu">
+        @for (item of menu; track item.label) {
+          <a ds-link-item href="#" [icon]="item.icon" [selected]="item.selected" [trailingIcon]="item.trailing" [slim]="slim()"
+             [label]="item.label">{{ item.label }}</a>
+        }
+      </div>
+    </ds-leftnav>
+
+    <main class="contenido">
+      <ds-breadcrumb class="migas" [items]="migas" separator="chevron" />
+
+      <mat-card appearance="outlined">
+        <div class="operacion__titulo">
+          <ds-icon-container icon="work" size="md" />
+          <div>
+            <p class="ds-text ds-text--title-md">Operation</p>
+            <p class="ds-text operacion__codigo">4790/OC-PN</p>
+          </div>
+        </div>
+        <div class="operacion__datos">
+          @for (d of datosOperacion; track d.etiqueta) {
+            <div [class.operacion__dato--angosto]="d.angosta">
+              <p class="ds-text ds-text--body-lg subtle">{{ d.etiqueta }}</p>
+              <p class="ds-text ds-text--body-lg">{{ d.valor }}</p>
+            </div>
+          }
+        </div>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <ds-step-list orientation="horizontal" content="number" [steps]="pasos" [selected]="pasoActual()"
+                      ariaLabel="Pasos de la enmienda" (stepClick)="pasoActual.set($event)" />
+      </mat-card>
+
+      <h1 class="ds-text ds-text--body-md-bold titulo-seccion">Enmiendas seleccionadas monto</h1>
+
+      <!-- Registro de la enmienda de monto -->
+      <mat-card appearance="outlined">
+        <h2 class="ds-text ds-text--title-md-bold">Registro de la enmienda de monto</h2>
+        <p class="ds-text ds-text--body-lg subtle">Selecciona el tipo de moneda del monto a ampliar, puedes seleccionar más de uno.</p>
+        <div class="monedas">
+          @for (m of monedas(); track m.codigo) {
+            <mat-checkbox [checked]="m.seleccionada" (change)="alternarMoneda(m.codigo, $event.checked)">{{ m.codigo }}</mat-checkbox>
+          }
+        </div>
+        <p class="ds-text ds-text--body-md-semibold acumulado">
+          <span>Total acumulado equivalente</span><span>(USD)</span><span>0.00</span>
+          <span>Porcentaje del monto original acumulado</span><span>0%</span>
+        </p>
+
+        @for (m of monedasActivas(); track m.codigo) {
+          <div class="tabla-enmienda">
+            <p class="ds-text ds-text--body-md fila fila--simple">Tipo de moneda</p>
+            <div class="fila fila--moneda">
+              <span class="ds-text ds-text--body-md">{{ m.codigo }}</span>
+              <button matButton="outlined" class="ds-button--sm"><mat-icon>add</mat-icon>Añadir componente</button>
+            </div>
+
+            <table class="componentes">
+              <caption class="cdk-visually-hidden">Componentes y productos de la enmienda en {{ m.codigo }}</caption>
+              <colgroup><col /><col class="col-monto" /><col class="col-monto" /><col class="col-monto" /><col class="col-monto" /><col class="col-monto" /><col class="col-accion" /></colgroup>
+
+              <!-- Componente existente -->
+              <tbody>
+                <tr class="grupo">
+                  <th scope="col">Componente</th>
+                  @for (c of columnasMonto; track c) { <th scope="col">{{ c }}</th> }
+                  <td class="accion" rowspan="2">
+                    <button matIconButton [attr.aria-label]="'Eliminar el componente 1.1 de ' + m.codigo"><mat-icon>delete</mat-icon></button>
+                  </td>
+                </tr>
+                <tr class="grupo">
+                  <td>Componente de compente 1.1</td>
+                  @for (c of columnasMonto; track c) { <td>0.00</td> }
+                </tr>
+                @for (p of productos; track $index) {
+                  <tr>
+                    <td class="producto"><span class="ds-text ds-text--body-md">Producto<br />{{ p }}</span></td>
+                    @for (c of columnasMonto.slice(0, 3); track c) {
+                      <td>
+                        <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                          <input matInput value="0.00" [attr.aria-label]="c.replace('\n', ' ') + ' del producto ' + ($index + 1)" />
+                        </mat-form-field>
+                      </td>
+                    }
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td class="accion">
+                      <button matIconButton [attr.aria-label]="'Eliminar el producto ' + ($index + 1)"><mat-icon>delete</mat-icon></button>
+                    </td>
+                  </tr>
+                }
+                <tr>
+                  <td colspan="7" class="anadir"><button matButton class="ds-button--sm"><mat-icon>add</mat-icon>Añadir Producto</button></td>
+                </tr>
+              </tbody>
+
+              <!-- Componente nuevo, por seleccionar -->
+              <tbody class="nuevo">
+                <tr class="grupo">
+                  <td rowspan="2" class="seleccion">
+                    <label class="ds-field-label" for="comp-{{ m.codigo }}">Componente<span class="obligatorio" aria-hidden="true">*</span></label>
+                    <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                      <mat-select id="comp-{{ m.codigo }}" placeholder="Seleccionar un componente" aria-required="true">
+                        @for (o of opcionesComponente; track o) { <mat-option [value]="o">{{ o }}</mat-option> }
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  @for (c of columnasMonto; track c) { <th scope="col">{{ c }}</th> }
+                  <td class="accion" rowspan="2">
+                    <button matIconButton [attr.aria-label]="'Eliminar el componente nuevo de ' + m.codigo"><mat-icon>delete</mat-icon></button>
+                  </td>
+                </tr>
+                <tr class="grupo">
+                  @for (c of columnasMonto; track c) { <td>0.00</td> }
+                </tr>
+                <tr>
+                  <td class="producto producto--seleccion">
+                    <label class="ds-field-label" for="prod-{{ m.codigo }}">Producto<span class="obligatorio" aria-hidden="true">*</span></label>
+                    <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                      <mat-select id="prod-{{ m.codigo }}" placeholder="Seleccionar producto" aria-required="true">
+                        @for (o of opcionesProducto; track o) { <mat-option [value]="o">{{ o }}</mat-option> }
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  @for (c of columnasMonto.slice(0, 3); track c) {
+                    <td>
+                      <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                        <input matInput value="0.00" [attr.aria-label]="c.replace('\n', ' ') + ' del producto nuevo'" />
+                      </mat-form-field>
+                    </td>
+                  }
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td class="accion">
+                    <button matIconButton aria-label="Eliminar el producto nuevo"><mat-icon>delete</mat-icon></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="7" class="anadir"><button matButton class="ds-button--sm"><mat-icon>add</mat-icon>Añadir Producto</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="ds-text ds-text--body-md-semibold total-moneda">
+              <span>Total acumulado en {{ m.codigo }}</span><span>0.00</span>
+              <span>Total acumulado equivalente (USD)</span><span>0.00</span>
+            </p>
+          </div>
+        }
+      </mat-card>
+
+      <!-- Garantía / Fianza -->
+      <mat-card appearance="outlined">
+        <h2 class="ds-text ds-text--title-md-bold">Garantía / Fianza</h2>
+        <p class="ds-text ds-text--body-lg subtle">En caso sea necesario puedes modificar la garantía registrada o crear una nueva</p>
+        <div class="garantia__datos">
+          <div><p class="ds-text ds-text--body-lg subtle">Tipo de Garantía / Fianza</p><p class="ds-text ds-text--body-lg-semibold">Garantía de anticipo</p></div>
+          <div><p class="ds-text ds-text--body-lg subtle">Tipo de moneda</p><p class="ds-text ds-text--body-lg-semibold">USD</p></div>
+          <div><p class="ds-text ds-text--body-lg subtle">Total equivalente (USD)</p><p class="ds-text ds-text--body-lg-semibold">670,270</p></div>
+        </div>
+
+        <div class="ds-table-container ds-table--lc">
+          <table mat-table [dataSource]="garantia" aria-label="Campos de la garantía">
+            <ng-container matColumnDef="campo">
+              <th mat-header-cell *matHeaderCellDef>Campos</th>
+              <td mat-cell *matCellDef="let r">
+                <mat-checkbox [checked]="marcados().has(r.id)" (change)="marcar(r.id, $event.checked)">{{ r.campo }}</mat-checkbox>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="original">
+              <th mat-header-cell *matHeaderCellDef>Valor original</th>
+              <td mat-cell *matCellDef="let r">{{ r.original }}</td>
+            </ng-container>
+            <ng-container matColumnDef="vigente">
+              <th mat-header-cell *matHeaderCellDef>Valor vigente</th>
+              <td mat-cell *matCellDef="let r">{{ r.vigente }}</td>
+            </ng-container>
+            <ng-container matColumnDef="nuevo">
+              <th mat-header-cell *matHeaderCellDef>Nuevo valor</th>
+              <td mat-cell *matCellDef="let r">
+                @if (r.tipo === 'fecha') {
+                  <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                    <input matInput [matDatepicker]="selector" [value]="r.nuevo" [disabled]="!marcados().has(r.id)"
+                           [attr.aria-label]="'Nuevo valor de ' + r.campo" />
+                    <mat-datepicker-toggle matIconSuffix [for]="selector" />
+                    <mat-datepicker #selector />
+                  </mat-form-field>
+                } @else {
+                  <mat-form-field appearance="outline" class="ds-field--sm" subscriptSizing="dynamic">
+                    <input matInput [value]="r.nuevo" [disabled]="!marcados().has(r.id)" [attr.aria-label]="'Nuevo valor de ' + r.campo" />
+                  </mat-form-field>
+                }
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnasGarantia"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasGarantia"></tr>
+          </table>
+          <div class="anadir anadir--tabla"><button matButton class="ds-button--sm"><mat-icon>add</mat-icon>Añade una garantia</button></div>
+        </div>
+      </mat-card>
+
+      <!-- Justificación -->
+      <mat-card appearance="outlined">
+        <h2 class="ds-text ds-text--title-md-bold">Justificación de enmienda (Opcional)</h2>
+        <p class="ds-text ds-text--body-lg subtle">En caso sea necesario puedes dar una descripción sobre el contexto, justificación y/o información extra de la enmienda.</p>
+        <mat-form-field appearance="outline" class="justificacion__campo" subscriptSizing="dynamic">
+          <textarea matInput rows="2" placeholder="Ingresa comentario" aria-label="Justificación de enmienda"></textarea>
+        </mat-form-field>
+      </mat-card>
+
+      <div class="acciones">
+        <button matButton><mat-icon>exit_to_app</mat-icon>Salir</button>
+        <div class="acciones__derecha">
+          <button matButton="outlined">Regresar</button>
+          <button matButton="filled">Continuar</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

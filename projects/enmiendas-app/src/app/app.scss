@@ -1,0 +1,102 @@
+// Solo layout de la pantalla. Todo el aspecto de los componentes (colores, tipografía, radios) viene de @bid/cp-ds.
+.pagina {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--ds-color-background);
+}
+
+.cuerpo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  flex: 1;
+  min-height: 0;
+}
+
+ds-leftnav { display: block; }
+.menu { display: flex; flex-direction: column; gap: var(--ds-space-8); }
+
+.contenido {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-16);
+  padding: 0 var(--ds-space-16) var(--ds-space-16); // Figma: 16px a cada lado, pegado al LeftNav
+}
+
+.migas { display: block; padding-top: var(--ds-space-16); margin-inline-start: calc(-1 * var(--ds-space-8)); } // el primer tramo va a ras del borde; su padding de 8px es solo del hover
+.subtle { color: var(--ds-color-text-subtle); }
+.obligatorio { color: var(--ds-color-text-danger); }
+p, h1, h2 { margin: 0; }
+.titulo-seccion { margin: 0; }
+
+// Datos de la operación
+.operacion__titulo { display: flex; align-items: center; gap: var(--ds-space-8); }
+.operacion__codigo { font-weight: var(--ds-font-weight-bold); font-size: 24px; line-height: 32px; }
+.operacion__datos { display: flex; align-items: center; gap: 10px; }
+.operacion__datos > div { flex: 1 1 0; min-width: 0; }
+.operacion__datos > .operacion__dato--angosto { flex: 0 0 112px; }
+
+// Registro de la enmienda de monto
+.monedas { display: flex; gap: var(--ds-space-8); }
+.acumulado {
+  display: flex; gap: var(--ds-space-8); padding: var(--ds-space-8); margin: 0;
+  background: var(--ds-ocean-95); color: var(--ds-color-text-default);
+}
+
+.tabla-enmienda {
+  border: 1px solid var(--ds-color-border-default);
+  border-radius: var(--ds-radius-s);
+  overflow: hidden;
+  background: var(--ds-color-surface);
+}
+.fila { display: flex; align-items: center; min-height: 50px; padding: var(--ds-space-4) var(--ds-space-12); box-sizing: border-box; }
+.fila--simple { padding-block: var(--ds-space-12); }
+.fila--moneda { gap: var(--ds-space-12); }
+
+.componentes { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.componentes .col-monto { width: 148px; }
+.componentes .col-accion { width: 56px; }
+.componentes th, .componentes td {
+  height: 50px;
+  padding: var(--ds-space-4) var(--ds-space-12);
+  text-align: start;
+  vertical-align: middle;
+  font: inherit;
+  font-size: var(--ds-body-md-size);
+  line-height: var(--ds-body-md-lh);
+  color: var(--ds-color-text-default);
+  white-space: pre-line;
+}
+.componentes th { font-weight: var(--ds-font-weight-semibold); }
+.componentes tr.grupo > * { background: var(--ds-color-background); }
+.componentes .accion { text-align: center; padding-inline: 0; vertical-align: middle; }
+.componentes .producto { padding-inline-start: var(--ds-space-40); white-space: normal; }
+.componentes .seleccion, .componentes .producto--seleccion { white-space: normal; }
+.componentes .seleccion { padding-block: var(--ds-space-8); }
+.componentes .anadir { padding-inline-start: var(--ds-space-20); }
+.componentes .nuevo tr:first-child > * { border-top: 0; }
+.componentes mat-form-field { width: 100%; }
+
+.total-moneda {
+  display: flex; justify-content: flex-end; gap: var(--ds-space-24); align-items: center; margin: 0;
+  padding: var(--ds-space-12) var(--ds-space-12); background: var(--ds-sky-99);
+  border-top: 1px solid var(--ds-color-primary);
+}
+.total-moneda span:nth-child(2) { margin-inline-end: var(--ds-space-12); }
+
+// Garantía / Fianza
+.garantia__datos { display: flex; gap: 10px; }
+.garantia__datos > div { flex: 1 1 0; min-width: 0; }
+.ds-table--lc table { table-layout: fixed; }
+.ds-table--lc .mat-mdc-header-cell, .ds-table--lc .mat-mdc-cell { width: 25%; }
+.ds-table--lc td .mat-mdc-form-field { width: 100%; }
+.anadir--tabla { padding: var(--ds-space-8) var(--ds-space-16); border-top: 1px solid var(--ds-color-border-default); }
+
+// Justificación
+.justificacion__campo { width: 100%; }
+.justificacion__campo textarea { resize: none; min-height: 56px; }
+
+// Botones de pie
+.acciones { display: flex; align-items: center; justify-content: space-between; padding-block: var(--ds-space-12); }
+.acciones__derecha { display: flex; gap: var(--ds-space-16); }

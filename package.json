@@ -15,7 +15,9 @@
     "lint:tokens": "node scripts/verificar-tokens.mjs",
     "lint:estilos": "npm run lint:paleta && npm run lint:tokens",
     "matriz-riesgos": "ng build cp-ds && ng serve matriz-riesgos-app",
-    "build:matriz-riesgos": "ng build cp-ds && ng build matriz-riesgos-app"
+    "build:matriz-riesgos": "ng build cp-ds && ng build matriz-riesgos-app",
+    "enmiendas": "ng build cp-ds && ng serve enmiendas-app --port 4201",
+    "build:enmiendas": "ng build cp-ds && ng build enmiendas-app"
   },
   "private": true,
   "packageManager": "npm@11.9.0",

@@ -372,6 +372,7 @@
 }
 .ds-link-item .ds-icon{ color:inherit; font-size:16px; flex-shrink:0; font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20 } /* opsz al piso soportado — sin esto el glifo (ej. "language") se ve con trazos desbalanceados/no centrados ópticamente dentro de su caja de 16px */
 .ds-link-item:hover{ background:var(--ds-neutral-99) }
+.ds-link-item.is-selected .ds-icon{ font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20 } /* Figma: el ícono del ítem seleccionado va relleno */
 .ds-link-item.is-selected{ background:var(--ds-sky-95); color:var(--ds-color-text-link) /* [AA] texto azul = Blue Sky 40 #0072a4 */; font-weight:var(--ds-font-weight-bold) }
 .ds-link-item:disabled{ color:var(--ds-color-text-disabled); cursor:not-allowed }
 .ds-link-item--compact{ padding-top:6px; padding-bottom:6px }
@@ -466,6 +467,8 @@
   border-bottom:1px solid var(--ds-color-border-subtle); font-weight:var(--ds-font-weight-bold); font-size:18px; color:var(--ds-ocean-50);
 }
 .ds-leftnav__header .ds-icon{ color:var(--ds-neutral-variant-20); font-size:24px }
+.ds-leftnav__header .ds-iconbtn.ds-iconbtn--sm{ width:24px; height:24px; padding:0 } /* Figma: la flecha es un ícono de 24px con padding 16 del header, no un botón de 32 */
+.ds-leftnav__header .ds-iconbtn.ds-iconbtn--sm .ds-icon{ font-size:24px }
 .ds-leftnav__content{ display:flex; flex-direction:column; gap:10px; flex:1; min-height:0; padding:var(--ds-space-24) 12px; overflow-y:auto }
 .ds-leftnav__subheader{ padding:0 var(--ds-space-16); font-size:var(--ds-label-sm-size); line-height:var(--ds-label-sm-lh); font-weight:var(--ds-font-weight-semibold); color:var(--ds-color-text-subtle); text-transform:uppercase }
 .ds-leftnav__lang{ margin-top:auto; display:flex; flex-direction:column; gap:10px }
@@ -500,7 +503,7 @@
    ========================================================== */
 
 .ds-stepper{ display:flex; flex-direction:column; width:100%; font-family:var(--ds-font-family) }
-.ds-stepper--h{ flex-direction:row; align-items:center }
+.ds-stepper--h{ flex-direction:row; align-items:center; gap:var(--ds-space-8) } /* Figma: 8px entre cada paso y su conector */
 /* El fondo se declara acá (no en un style inline del template): un `background` inline le gana a
    las clases y dejaba invisibles a Hover y Selected. */
 .ds-step{
@@ -525,7 +528,8 @@ button.ds-step{ cursor:pointer }
    whitespace-nowrap; solo el horizontal lo fuerza, porque ahí los títulos son una palabra corta). */
 .ds-step__title{ margin:0; font-weight:var(--ds-font-weight-bold); font-size:var(--ds-body-md-size); line-height:var(--ds-body-md-lh); color:var(--ds-color-text-default) }
 .ds-step__subtitle{ margin:0; font-size:var(--ds-body-sm-size); line-height:var(--ds-body-sm-lh); color:var(--ds-color-text-subtle) }
-.ds-stepper--h .ds-step__title, .ds-stepper--h .ds-step__subtitle{ white-space:nowrap }
+.ds-stepper--h .ds-step__title, .ds-stepper--h .ds-step__subtitle{ white-space:pre } /* pre: sin wrap, y respeta un salto de línea explícito en el título ("Registro
+de enmienda") */
 .ds-step--inactive .ds-step__title, .ds-step--inactive .ds-step__subtitle{ color:var(--ds-color-text-subtlest) } /* [AA] Figma: disabled #929090 (3.17:1); un paso pendiente es información, no un control deshabilitado → Neutral 70 #6d6b6b (5.30:1) */
 .ds-step--error .ds-step__title, .ds-step--error .ds-step__subtitle{ color:var(--ds-error-30) } /* = #790001, confirmado real */
 /* Type=Hover / Type=Selected del nodo 540:11813. La clase estática existe para documentarlo;

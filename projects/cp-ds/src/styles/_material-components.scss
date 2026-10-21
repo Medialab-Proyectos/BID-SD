@@ -523,7 +523,9 @@
 
   // Form field Small (40px).
   .ds-field--sm {
-    @include mat.form-field-overrides((container-height: 40px, container-vertical-padding: 8px));
+    @include mat.form-field-overrides((container-height: 40px, container-vertical-padding: 8px, container-text-size: var(--ds-body-md-size), container-text-line-height: var(--ds-body-md-lh)));
+    // Figma Input 40px: el texto es Body Medium (14/20), no el Body Large del campo de 56px.
+    .mat-mdc-input-element, .mat-mdc-select, .mat-mdc-select-value { font-size: var(--ds-body-md-size); line-height: var(--ds-body-md-lh); }
   }
   // Buscador global (Figma "Input-Search" Type=Global, nodo 8128:1095): campo de 40px en píldora (radio 80px),
   // padding 16px; hover con borde #232222. `ds-field--global-inverse` = fondo celeste (Interaction/selected).

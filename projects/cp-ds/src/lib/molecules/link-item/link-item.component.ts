@@ -25,6 +25,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         <ng-content />
         @if (secondary()) { <span class="ds-link-item__secondary">{{ secondary() }}</span> }
       </span>
+      @if (trailingIcon()) { <span class="ds-icon" aria-hidden="true">{{ trailingIcon() }}</span> }
     }
   `,
 })
@@ -32,6 +33,8 @@ export class DsLinkItem {
   readonly icon = input('');
   readonly selected = input(false);
   readonly secondary = input('');
+  /** Ícono al final de la fila (Figma `.right-action`), p. ej. `expand_more` en un ítem que despliega un submenú. */
+  readonly trailingIcon = input('');
   readonly slim = input(false);
   /** Texto accesible en modo slim (solo ícono). */
   readonly label = input('');
